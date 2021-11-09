@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useBugShot = () => {
-  const [image, setImage] = useState<string>(process.env.BUGSHOT);
+  const [image, setImage] = useState<string>();
 
   useEffect(() => {
     const listener = (event: Event) => {

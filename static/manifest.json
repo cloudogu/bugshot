@@ -19,7 +19,8 @@
         "128": "images/camera128.png"
     },
     "permissions": [
-        "activeTab"
+        "activeTab",
+        "storage"
     ],
     "manifest_version": 2
 }

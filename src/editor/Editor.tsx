@@ -1,24 +1,17 @@
 import React, { FC } from "react";
 import ImageEditor from "./ImageEditor";
-import useBugShot from "./useBugShot";
+import IssueEditor from "./IssueEditor";
 import "twin.macro";
 
-const Editor: FC = () => {
-  const bugshot = useBugShot();
-  return (
-      <div tw="flex flex-row">
-        <main role="main" tw="w-full w-3/4">
-          {bugshot ? (
-            <ImageEditor image={bugshot} />
-          ) : (
-            <p>No screenshot taken</p>
-          )}
-        </main>
-        <aside tw="w-full w-1/4">
-          Redmine
-        </aside>
-      </div>
-  );
-};
+const Editor: FC = () => (
+  <div tw="flex flex-row flex-wrap h-screen">
+    <main tw="w-3/4 h-full shadow-md border-2">
+      <ImageEditor  />
+    </main>
+    <aside tw="w-1/4 h-full">
+      <IssueEditor />
+    </aside>
+  </div>
+);
 
 export default Editor;
