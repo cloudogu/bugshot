@@ -20,7 +20,9 @@
     },
     "permissions": [
         "activeTab",
-        "storage"
+        "storage",
+        "http://*/",
+        "https://*/"
     ],
     "manifest_version": 2
 }
