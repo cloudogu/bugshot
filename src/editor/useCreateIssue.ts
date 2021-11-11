@@ -7,6 +7,11 @@ export type Issue = {
   description: string;
 };
 
+export type CreatedIssue = {
+  id: string;
+  url: string;
+}
+
 type UploadResponse = {
   upload: {
     token: string;
@@ -18,8 +23,16 @@ const useCreateIssue = () => {
   const [error, setError] = useState<Error>();
   const { connection } = useConnection();
 
-  const create = (issue: Issue, screenshot: Screenshot) => {
+  const create = (
+    issue: Issue,
+    screenshot: Screenshot,
+    callback: (issue: CreatedIssue) => void
+  ) => {
     setIsLoading(true);
+
+    if (!connection) {
+      throw new Error("connection is not defined");
+    }
 
     let baseUrl = connection.url;
     if (!baseUrl.endsWith("/")) {
@@ -81,7 +94,7 @@ const useCreateIssue = () => {
           method: "POST",
           headers: {
             "X-Redmine-API-Key": connection.apiKey,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
           // do not prompt for basic auth if key authentication failed
           credentials: "omit",
@@ -92,7 +105,13 @@ const useCreateIssue = () => {
         if (!resp.ok) {
           throw new Error("failed to create issue");
         }
+        return resp.json();
       })
+      .then(data => ({
+        id: data.issue.id,
+        url: `${baseUrl}issues/${data.issue.id}`
+      }))
+      .then(callback)
       .catch(setError)
       .finally(() => setIsLoading(false));
   };

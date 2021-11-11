@@ -3,7 +3,7 @@ import { InputHTMLAttributes } from "react";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
-  error?: string;
+  error?: string | null;
 };
 
 const InputField = React.forwardRef<HTMLInputElement, InputProps>(
