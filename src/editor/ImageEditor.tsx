@@ -1,13 +1,16 @@
-import React, { FC, useRef } from "react";
+import React, { FC, MutableRefObject, useRef } from "react";
 import ReactImgEditor from "react-img-editor";
 import "react-img-editor/assets/index.css";
 import useBugShot from "./useBugShot";
 import "twin.macro";
 import useDimension from "./useDimension";
 
-const ImageEditor: FC = () => {
+type Props = {
+  stageRef: MutableRefObject<unknown>;
+};
+
+const ImageEditor: FC<Props> = ({ stageRef }) => {
   const image = useBugShot();
-  const stageRef = useRef<any>(null);
   const { ref, width, height } = useDimension<HTMLDivElement>();
 
   const setStage = (stage: any) => {

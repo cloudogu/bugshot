@@ -1,8 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import useConnection from "./useConnection";
 import CreateConnection from "./CreateConnection";
+import { Screenshot } from "./Screenshot";
+import CreateIssue from "./CreateIssue";
+import "twin.macro";
 
-const IssueEditor = () => {
+type Props = {
+  screenshot: Screenshot;
+};
+
+const Editor: FC<Props> = ({screenshot}) => {
   const { connection, isLoading, update } = useConnection();
 
   if (isLoading) {
@@ -13,12 +20,13 @@ const IssueEditor = () => {
     return <CreateConnection {...update} />;
   }
 
-  return (
-    <>
-      <h2>Was geht?</h2>
-      <p>{JSON.stringify(connection)}</p>
-    </>
-  );
+  return <CreateIssue screenshot={screenshot} />;
 };
+
+const IssueEditor: FC<Props> = ({screenshot}) => (
+  <div tw="p-8 max-w-md">
+    <Editor screenshot={screenshot} />
+  </div>
+);
 
 export default IssueEditor;
