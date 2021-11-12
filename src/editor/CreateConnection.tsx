@@ -4,6 +4,9 @@ import { Connection } from "./useConnection";
 import InputField from "../form/InputField";
 import Button from "../form/Button";
 import "twin.macro";
+import ErrorNotification from "../form/ErrorNotification";
+import FormContainer from "../form/FormContainer";
+import Title from "./Title";
 
 type Props = {
   setConnection: (connection: Connection) => void;
@@ -20,13 +23,9 @@ const CreateConnection: FC<Props> = ({ setConnection, error, isLoading }) => {
 
   return (
     <form onSubmit={handleSubmit(setConnection)}>
-      <h2 tw="text-2xl font-bold">Create Redmine Connection</h2>
-      {error ? (
-        <p tw="text-red-700">
-          <strong>Error</strong> {error.message}
-        </p>
-      ) : null}
-      <div tw="mt-8 grid grid-cols-1 gap-6">
+      <Title>Create Redmine Connection</Title>
+      <ErrorNotification error={error} />
+      <FormContainer>
         <InputField
           label="URL"
           {...register("url", { required: true })}
@@ -40,7 +39,7 @@ const CreateConnection: FC<Props> = ({ setConnection, error, isLoading }) => {
         <Button type="submit" isLoading={isLoading}>
           Save
         </Button>
-      </div>
+      </FormContainer>
     </form>
   );
 };

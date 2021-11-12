@@ -6,6 +6,9 @@ import InputField from "../form/InputField";
 import Button from "../form/Button";
 import { Connection } from "./useConnection";
 import Textarea from "../form/Textarea";
+import ErrorNotification from "../form/ErrorNotification";
+import FormContainer from "../form/FormContainer";
+import Title from "./Title";
 
 type Props = {
   connection: Connection;
@@ -55,13 +58,9 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot }) => {
         create(issue, screenshot, bugshot, close)
       )}
     >
-      <h2 tw="text-2xl font-bold">Create Issue</h2>
-      {error ? (
-        <p tw="text-red-700">
-          <strong>Error</strong> {error.message}
-        </p>
-      ) : null}
-      <div tw="mt-8 grid grid-cols-1 gap-6">
+      <Title>Create Issue</Title>
+      <ErrorNotification error={error} />
+      <FormContainer>
         <InputField
           label="Subject"
           {...register("subject", { required: true })}
@@ -71,7 +70,7 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot }) => {
         <Button type="submit" isLoading={isLoading}>
           Save
         </Button>
-      </div>
+      </FormContainer>
     </form>
   );
 };
