@@ -9,7 +9,6 @@ type BugShot = {
 
 // @ts-ignore
 window.onBugShot = (bugshot: BugShot) => {
-  console.log("bugshot", bugshot)
   const event = new CustomEvent<BugShot>("bugshot", {
     detail: bugshot,
     bubbles: true,

@@ -2,7 +2,6 @@
 // query param to the url that displays the screenshot.
 let id = 100;
 const createBugShot = (capturedTab: chrome.tabs.Tab) => {
-  console.log("bugshot", capturedTab)
   chrome.tabs.captureVisibleTab((screenshotUrl) => {
     const viewTabUrl = chrome.extension.getURL("screenshot.html?id=" + id++);
     let targetId: number | undefined = undefined;
