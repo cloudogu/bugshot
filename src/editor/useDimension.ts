@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 
 const useDimension = <T extends HTMLElement>() => {
   const [width, setWidth] = useState(-1);

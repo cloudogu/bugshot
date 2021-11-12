@@ -1,9 +1,8 @@
 // To make sure we can uniquely identify each screenshot tab, add an id as a
 // query param to the url that displays the screenshot.
 let id = 100;
-
-// Listen for a click on the camera icon. On that click, take a screenshot.
-chrome.browserAction.onClicked.addListener(() => {
+const createBugShot = (capturedTab: chrome.tabs.Tab) => {
+  console.log("bugshot", capturedTab)
   chrome.tabs.captureVisibleTab((screenshotUrl) => {
     const viewTabUrl = chrome.extension.getURL("screenshot.html?id=" + id++);
     let targetId: number | undefined = undefined;
@@ -30,8 +29,23 @@ chrome.browserAction.onClicked.addListener(() => {
       for (var i = 0; i < views.length; i++) {
         var view = views[i];
         if (view.location.href == viewTabUrl) {
+
+          let resolution;
+          if (capturedTab.width && capturedTab.height) {
+            resolution = {
+              width: capturedTab.width,
+              height: capturedTab.height
+            };
+          }
+
+          const bugshot: BugShot = {
+            url: capturedTab.url,
+            screenshotUrl,
+            resolution
+          };
+
           // @ts-ignore
-          view.onBugShot(screenshotUrl);
+          view.onBugShot(bugshot);
           break;
         }
       }
@@ -44,6 +58,17 @@ chrome.browserAction.onClicked.addListener(() => {
       targetId = tab.id;
     });
   });
+
+};
+
+// Listen for a click on the camera icon. On that click, take a screenshot.
+chrome.browserAction.onClicked.addListener(() => {
+  chrome.tabs.query(({active: true}), tabs => {
+    if (tabs && tabs.length === 1) {
+      createBugShot(tabs[0]);
+    }
+  });
+  
 });
 
 chrome.notifications.onButtonClicked.addListener(

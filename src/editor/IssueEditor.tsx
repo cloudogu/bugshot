@@ -6,13 +6,14 @@ import CreateIssue from "./CreateIssue";
 import "twin.macro";
 
 type Props = {
+  bugshot?: BugShot;
   screenshot: Screenshot;
 };
 
-const Editor: FC<Props> = ({ screenshot }) => {
+const Editor: FC<Props> = ({ bugshot, screenshot }) => {
   const { connection, isLoading, update } = useConnection();
 
-  if (isLoading) {
+  if (isLoading || !bugshot) {
     return <p>Loading ...</p>;
   }
 
@@ -20,12 +21,18 @@ const Editor: FC<Props> = ({ screenshot }) => {
     return <CreateConnection {...update} />;
   }
 
-  return <CreateIssue screenshot={screenshot} connection={connection} />;
+  return (
+    <CreateIssue
+      connection={connection}
+      bugshot={bugshot}
+      screenshot={screenshot}
+    />
+  );
 };
 
-const IssueEditor: FC<Props> = ({ screenshot }) => (
+const IssueEditor: FC<Props> = (props) => (
   <div tw="p-8 max-w-md">
-    <Editor screenshot={screenshot} />
+    <Editor {...props} />
   </div>
 );
 

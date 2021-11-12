@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 
 const useBugShot = () => {
-  const [image, setImage] = useState<string>();
+  const [bugshot, setBugShot] = useState<BugShot>();
 
   useEffect(() => {
     const listener = (event: Event) => {
-      // @ts-ignore
-      const url = event.detail.url;
-      setImage(url);
+      const url = (event as CustomEvent<BugShot>).detail;
+      setBugShot(url);
     };
     window.addEventListener("bugshot", listener);
     return () => {
@@ -15,7 +14,7 @@ const useBugShot = () => {
     };
   }, []);
 
-  return image;
+  return bugshot;
 };
 
 export default useBugShot;

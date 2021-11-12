@@ -10,7 +10,7 @@ export type Issue = {
 export type CreatedIssue = {
   id: string;
   url: string;
-}
+};
 
 type UploadResponse = {
   upload: {
@@ -26,6 +26,7 @@ const useCreateIssue = () => {
   const create = (
     issue: Issue,
     screenshot: Screenshot,
+    bugshot: BugShot,
     callback: (issue: CreatedIssue) => void
   ) => {
     setIsLoading(true);
@@ -37,6 +38,15 @@ const useCreateIssue = () => {
     let baseUrl = connection.url;
     if (!baseUrl.endsWith("/")) {
       baseUrl += "/";
+    }
+
+    let description = issue.description;
+    description += "\n\n---\n";
+    if (bugshot.url) {
+      description += `**URL:** ${bugshot.url}\n`;
+    }
+    if (bugshot.resolution) {
+      description += `**Resolution:** ${bugshot.resolution.width}x${bugshot.resolution.height}`;
     }
 
     const filename = `bugshot-${new Date().toISOString()}.png`;
@@ -69,7 +79,7 @@ const useCreateIssue = () => {
           priority_id: 1,
           category_id: 57,
           subject: issue.subject,
-          description: issue.description,
+          description: description,
           custom_fields: [
             {
               id: 1,
@@ -107,9 +117,9 @@ const useCreateIssue = () => {
         }
         return resp.json();
       })
-      .then(data => ({
+      .then((data) => ({
         id: data.issue.id,
-        url: `${baseUrl}issues/${data.issue.id}`
+        url: `${baseUrl}issues/${data.issue.id}`,
       }))
       .then(callback)
       .catch(setError)

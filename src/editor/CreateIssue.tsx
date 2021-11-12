@@ -9,9 +9,10 @@ import useConnection, { Connection } from "./useConnection";
 type Props = {
   connection: Connection;
   screenshot: Screenshot;
+  bugshot: BugShot;
 };
 
-const CreateIssue: FC<Props> = ({ connection, screenshot }) => {
+const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot }) => {
   const { create, isLoading, error } = useCreateIssue();
   const {
     register,
@@ -48,7 +49,7 @@ const CreateIssue: FC<Props> = ({ connection, screenshot }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit((issue) => create(issue, screenshot, close))}>
+    <form onSubmit={handleSubmit((issue) => create(issue, screenshot, bugshot, close))}>
       <h2 tw="text-2xl font-bold">Create Issue</h2>
       {error ? (
         <p tw="text-red-700">
