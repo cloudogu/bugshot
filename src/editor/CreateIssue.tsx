@@ -19,26 +19,13 @@ const CreateIssue: FC<Props> = ({ connection, screenshot }) => {
     formState: { errors },
   } = useForm<Issue>();
 
-  useEffect(() => {
-    const listener = (notifId: string, btnIdx: number) => {
-      if (notifId.startsWith("bugshot-") && btnIdx === 0) {
-        const id = notifId.replace("bugshot-", "");
-        if (connection) {
-          let baseUrl = connection.url;
-          if (!baseUrl.endsWith("/")) {
-            baseUrl += "/";
-          }
-          chrome.tabs.create({ url: `${baseUrl}issues/${id}` });
-        }
-      }
-    };
-
-    chrome.notifications.onButtonClicked.addListener(listener);
-    return () => chrome.notifications.onButtonClicked.removeListener(listener);
-  }, []);
-
   const close = (issue: CreatedIssue) => {
-    chrome.notifications.create(`bugshot-${issue.id}`, {
+    let baseUrl = connection.url;
+    if (!baseUrl.endsWith("/")) {
+      baseUrl += "/";
+    }
+
+    chrome.notifications.create(`bugshot-${baseUrl}issues/${issue.id}`, {
       type: "basic",
       iconUrl: "camera.png",
       title: `Created issue ${issue.id}`,
@@ -51,11 +38,13 @@ const CreateIssue: FC<Props> = ({ connection, screenshot }) => {
       ],
     });
 
-    chrome.tabs.getCurrent((tab) => {
-      if (tab && tab.id) {
-        // chrome.tabs.remove(tab.id);
-      }
-    });
+    setTimeout(() => {
+      chrome.tabs.getCurrent((tab) => {
+        if (tab && tab.id) {
+          chrome.tabs.remove(tab.id);
+        }
+      });
+    }, 500);
   };
 
   return (

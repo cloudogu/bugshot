@@ -4,16 +4,15 @@ let id = 100;
 
 // Listen for a click on the camera icon. On that click, take a screenshot.
 chrome.browserAction.onClicked.addListener(() => {
-
   chrome.tabs.captureVisibleTab((screenshotUrl) => {
-    const viewTabUrl = chrome.extension.getURL('screenshot.html?id=' + id++)
-    let targetId: number = null;
+    const viewTabUrl = chrome.extension.getURL("screenshot.html?id=" + id++);
+    let targetId: number | undefined = undefined;
 
     chrome.tabs.onUpdated.addListener(function listener(tabId, changedProps) {
       // We are waiting for the tab we opened to finish loading.
       // Check that the tab's id matches the tab we opened,
       // and that the tab is done loading.
-      if (tabId != targetId || changedProps.status != "complete"){
+      if (tabId != targetId || changedProps.status != "complete") {
         return;
       }
       // As we cleared the check above, There is nothing we need to do for
@@ -41,8 +40,17 @@ chrome.browserAction.onClicked.addListener(() => {
     //We open the tab URL by using the chrome tabs create method and passing it the
     // URL that we just created and we save the tab id that we get from this method
     // after the tab is created in the targetId variable.
-    chrome.tabs.create({url: viewTabUrl}, (tab) => {
+    chrome.tabs.create({ url: viewTabUrl }, (tab) => {
       targetId = tab.id;
     });
   });
 });
+
+chrome.notifications.onButtonClicked.addListener(
+  (notifId: string, btnIdx: number) => {
+    if (notifId.startsWith("bugshot-") && btnIdx === 0) {
+      const url = notifId.replace("bugshot-", "");
+      chrome.tabs.create({ url: url });
+    }
+  }
+);
