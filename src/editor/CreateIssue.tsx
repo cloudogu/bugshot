@@ -45,7 +45,7 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot }) => {
           chrome.tabs.remove(tab.id);
         }
       });
-    }, 500);
+    }, 50);
   };
 
   return (
