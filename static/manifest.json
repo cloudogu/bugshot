@@ -1,29 +1,35 @@
 {
-    "name": "BugShot",
-    "version": "1.0",
-    "description": "Building a screenshot taking extension",
-    "background": {
-        "scripts": [
-            "background.js"
-        ],
-        "persistent": false
-    },
-    "browser_action": {
-        "default_icon": "camera.png",
-        "default_title": "Take a screen shot!"
-    },
-    "icons": {
-        "16": "images/camera16.png",
-        "32": "images/camera32.png",
-        "64": "images/camera64.png",
-        "128": "images/camera128.png"
-    },
-    "permissions": [
-        "activeTab",
-        "storage",
-        "notifications",
-        "http://*/",
-        "https://*/"
-    ],
-    "manifest_version": 2
+  "manifest_version": 2,
+  "name": "BugShot",
+  "version": "1.0",
+  "description": "Building a screenshot taking extension",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "camera.png",
+    "default_title": "Take a screen shot!"
+  },
+  "icons": {
+    "16": "images/camera16.png",
+    "32": "images/camera32.png",
+    "64": "images/camera64.png",
+    "128": "images/camera128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "notifications",
+    "http://*/",
+    "https://*/"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Shift+Ctrl+S",
+        "mac": "Shift+Command+S"
+      }
+    }
+  }
 }
