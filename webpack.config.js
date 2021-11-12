@@ -1,11 +1,12 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
 module.exports = {
   mode: isDevelopment ? "development" : "production",
-  devtool: 'cheap-module-source-map',
+  devtool: "cheap-module-source-map",
   entry: {
     background: "./src/background.ts",
     screenshot: "./src/screenshot.ts",
@@ -30,12 +31,13 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new CopyPlugin({
       patterns: [{ from: "static", to: "." }],
-    })
+    }),
   ],
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
-  }
+  },
 };
