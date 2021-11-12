@@ -52,7 +52,13 @@ const useCreateIssue = () => {
     const filename = `bugshot-${new Date().toISOString()}.png`;
     screenshot
       .toBlob()
-      .then((blob) =>
+      .then(blob => {
+        if (!blob) {
+          throw new Error("failed to retrieve blob from screenshot");
+        }
+        return blob;
+      })
+      .then((blob) => 
         fetch(`${baseUrl}uploads.json?filename=${filename}`, {
           headers: {
             "X-Redmine-API-Key": connection.apiKey,

@@ -1,3 +1,3 @@
 export type Screenshot = {
-  toBlob: () => Promise<Blob>;
+  toBlob: () => Promise<Blob | null>;
 };

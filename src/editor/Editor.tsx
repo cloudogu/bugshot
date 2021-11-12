@@ -11,8 +11,8 @@ const createScreenshot = (stageRef: MutableRefObject<any>): Screenshot => {
       const canvas = stageRef.current.clearAndToCanvas({
         pixelRatio: stageRef.current._pixelRatio,
       }) as HTMLCanvasElement;
-      return new Promise<Blob>((resolve) => {
-        canvas.toBlob(resolve);
+      return new Promise<Blob | null>((resolve) => {
+        canvas.toBlob(blob => resolve(blob));
       });
     },
   };

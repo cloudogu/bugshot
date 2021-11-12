@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import InputField from "./InputField";
 import { useForm } from "react-hook-form";
 import { Connection } from "./useConnection";
+import InputField from "../form/InputField";
+import Button from "../form/Button";
 import "twin.macro";
-import Button from "./Button";
 
 type Props = {
   setConnection: (connection: Connection) => void;

@@ -1,7 +1,0 @@
-- Connect to redmine (URL, Username, APIKey)
-- 
-
-
-Notes:
-
-- https://developer.chrome.com/docs/extensions/reference/storage/
