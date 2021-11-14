@@ -6,6 +6,7 @@
   "author": "Sebastian Sdorra <s.sdorra@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "NODE_ENV=production webpack",
     "develop": "NODE_ENV=development webpack --watch"
   },
   "dependencies": {
