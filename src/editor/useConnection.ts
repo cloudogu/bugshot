@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import createRedmineApi from "./api";
 
 export type Connection = {
   url: string;
@@ -23,24 +24,9 @@ const useConnection = () => {
   const updateConnection = (connection: Connection) => {
     setUpdateIsLoading(true);
 
-    let meUrl = connection.url;
-    if (!meUrl.endsWith("/")) {
-      meUrl += "/";
-    }
-    meUrl += "my/account.json";
-
-    fetch(meUrl, {
-      headers: {
-        "X-Redmine-API-Key": connection.apiKey,
-      },
-      // do not prompt for basic auth if key authentication failed
-      credentials: "omit"
-    })
-      .then((resp) => {
-        if (!resp.ok) {
-          throw new Error("request failed");
-        }
-      })
+    const api = createRedmineApi(connection);
+    api
+      .me()
       .then(() => {
         chrome.storage.sync.set(
           { connection: JSON.stringify(connection) },
