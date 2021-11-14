@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { Screenshot } from "./Screenshot";
+import { Template } from "./useTemplates";
 import useRedmineApi from "./useRedmineApi";
 
 export type Issue = {
   subject: string;
   description: string;
+  template: Template;
+  screenshot: Screenshot;
 };
 
 export type CreatedIssue = {
   id: string;
   url: string;
 };
-
 
 const useCreateIssue = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +22,6 @@ const useCreateIssue = () => {
 
   const create = (
     issue: Issue,
-    screenshot: Screenshot,
     bugshot: BugShot,
     callback: (issue: CreatedIssue) => void
   ) => {
@@ -41,30 +42,12 @@ const useCreateIssue = () => {
 
     const filename = `bugshot-${new Date().toISOString()}.png`;
     api
-      .upload(screenshot, filename)
+      .upload(issue.screenshot, filename)
       .then((token) =>
         api.create({
-          project_id: 1,
-          tracker_id: 1,
-          status_id: 1,
-          priority_id: 1,
-          category_id: 57,
+          ...issue.template,
           subject: issue.subject,
           description: description,
-          custom_fields: [
-            {
-              id: 1,
-              value: "ITZ TAM",
-            },
-            {
-              id: 36,
-              value: "Team SCM",
-            },
-            {
-              id: 38,
-              value: "Created with bugshot!",
-            },
-          ],
           uploads: [{ token: token, filename, content_type: "image/png" }],
         })
       )

@@ -9,6 +9,8 @@ import Textarea from "../form/Textarea";
 import ErrorNotification from "../form/ErrorNotification";
 import FormContainer from "../form/FormContainer";
 import Title from "./Title";
+import Select from "../form/Select";
+import useTemplates from "./useTemplates";
 
 type Props = {
   connection: Connection;
@@ -16,13 +18,24 @@ type Props = {
   bugshot: BugShot;
 };
 
+type CreateIssueForm = {
+  subject: string;
+  description: string;
+  template: string;
+};
+
 const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot }) => {
   const { create, isLoading, error } = useCreateIssue();
+  const { selected, templates } = useTemplates();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Issue>();
+  } = useForm<CreateIssueForm>({
+    defaultValues: {
+      template: selected,
+    },
+  });
 
   const close = (issue: CreatedIssue) => {
     let baseUrl = connection.url;
@@ -55,12 +68,30 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot }) => {
   return (
     <form
       onSubmit={handleSubmit((issue) =>
-        create(issue, screenshot, bugshot, close)
+        create(
+          {
+            subject: issue.subject,
+            description: issue.description,
+            template: templates[issue.template],
+            screenshot,
+          },
+          bugshot,
+          close
+        )
       )}
     >
       <Title>Create Issue</Title>
       <ErrorNotification error={error} />
       <FormContainer>
+        <Select
+          label="Template"
+          {...register("template", { required: true })}
+          error={errors.template ? "Template is required" : null}
+        >
+          {Object.keys(templates).map((template) => (
+            <option key={template}>{template}</option>
+          ))}
+        </Select>
         <InputField
           label="Subject"
           {...register("subject", { required: true })}

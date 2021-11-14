@@ -1,4 +1,5 @@
 import { Screenshot } from "./Screenshot";
+import { Template } from "./useTemplates";
 
 export type Connection = {
   url: string;
@@ -11,26 +12,15 @@ type UploadResponse = {
   };
 };
 
-export type CustomField = {
-  id: number;
-  value: string;
-};
-
 export type Upload = {
   token: string;
   filename: string;
   content_type: string;
 };
 
-export type Issue = {
-  project_id: number;
-  tracker_id: number;
-  status_id: number;
-  priority_id: number;
-  category_id: number;
+export type Issue = Template & {
   subject: string;
-  description: string;
-  custom_fields: CustomField[];
+  description?: string;
   uploads: Upload[];
 };
 

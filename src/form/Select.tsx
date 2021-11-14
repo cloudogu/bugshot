@@ -1,25 +1,26 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { SelectHTMLAttributes } from "react";
 import FieldError from "./FieldError";
 import Label from "./Label";
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+type Props = SelectHTMLAttributes<HTMLSelectElement> & {
   label: string;
   error?: string | null;
 };
 
-const InputField = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, ...props }, ref) => (
+const Select = React.forwardRef<HTMLSelectElement, Props>(
+  ({ label, error, children, ...props }, ref) => (
     <Label value={label}>
-      <input
+      <select
         tw="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         placeholder={label}
-        type="text"
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+      </select>
       <FieldError error={error} />
     </Label>
   )
 );
 
-export default InputField;
+export default Select;
