@@ -2248,14 +2248,9 @@ react-hook-form@^7.19.1:
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.19.1.tgz#df19c065a96cbd4275c4ca8992a9f5908b114a4f"
   integrity sha512-e0Oii07qNAa72JeGUT5czVCMwdAFPxmxYvd1Y9oPy2KVD6ZGblN6DG1G7AwL9Bz2lOPFZu15SRNnn0Vpx/eGdg==
 
-react-img-editor@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/react-img-editor/-/react-img-editor-0.2.1.tgz#a69041845aa1a5a153706a490dcccd74208f3dbe"
-  integrity sha512-LtuLzfWpKsT5Wv+yagZMUxCMR0Ww2VM02nSjBCxj4B40KAdnIQeQKptkI0z0R/PLLl0zwv5NHSIFlWUpyFq2uA==
-  dependencies:
-    konva "^4.1.2"
-    pubsub-js "^1.8.0"
-    rc-tooltip "^4.0.0-alpha.3"
+"react-img-editor@link:../react-img-editor":
+  version "0.0.0"
+  uid ""
 
 react-is@^16.12.0, react-is@^16.7.0:
   version "16.13.1"

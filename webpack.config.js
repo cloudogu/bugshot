@@ -28,7 +28,8 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    alias: { react: require.resolve("react") },
+    extensions: [".tsx", ".ts", ".js", ".css"],
   },
   plugins: [
     new CleanWebpackPlugin(),
