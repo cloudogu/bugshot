@@ -1,6 +1,6 @@
 import React, { FC, MutableRefObject } from "react";
-import ReactImgEditor from "react-img-editor/lib/index.js";
-import "react-img-editor/lib/index.css";
+import ReactImgEditor from "@cloudogu/react-img-editor";
+import "@cloudogu/react-img-editor/lib/index.css";
 import "twin.macro";
 import useDimension from "./useDimension";
 

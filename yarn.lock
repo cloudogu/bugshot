@@ -316,6 +316,15 @@
     "@babel/helper-validator-identifier" "^7.15.7"
     to-fast-properties "^2.0.0"
 
+"@cloudogu/react-img-editor@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@cloudogu/react-img-editor/-/react-img-editor-0.3.0.tgz#4d874b3651bcd849cebc55c9fd8c09e3c003fffb"
+  integrity sha512-tixtpysc508agDZZmLPgvv+fJO2qeG/s6470yAH2auufwdGH8JJYnvrjZZNunPFyj2/8ajAnpUWuHCil4xo+nA==
+  dependencies:
+    konva "^4.1.2"
+    pubsub-js "^1.8.0"
+    rc-tooltip "^4.0.0-alpha.3"
+
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.5.tgz#9283c9ce5b289a3c4f61c12757469e59377f81f3"
@@ -2247,10 +2256,6 @@ react-hook-form@^7.19.1:
   version "7.19.1"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.19.1.tgz#df19c065a96cbd4275c4ca8992a9f5908b114a4f"
   integrity sha512-e0Oii07qNAa72JeGUT5czVCMwdAFPxmxYvd1Y9oPy2KVD6ZGblN6DG1G7AwL9Bz2lOPFZu15SRNnn0Vpx/eGdg==
-
-"react-img-editor@link:../react-img-editor":
-  version "0.0.0"
-  uid ""
 
 react-is@^16.12.0, react-is@^16.7.0:
   version "16.13.1"
