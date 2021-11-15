@@ -8,7 +8,6 @@ import { Connection } from "./useConnection";
 import Textarea from "../form/Textarea";
 import ErrorNotification from "../form/ErrorNotification";
 import FormContainer from "../form/FormContainer";
-import Title from "./Title";
 import Select from "../form/Select";
 import useTemplates from "./useTemplates";
 
@@ -80,7 +79,6 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot }) => {
         )
       )}
     >
-      <Title>Create Issue</Title>
       <ErrorNotification error={error} />
       <FormContainer>
         <Select

@@ -10,7 +10,7 @@ type Props = {
   screenshot: Screenshot;
 };
 
-const Editor: FC<Props> = ({ bugshot, screenshot }) => {
+const IssueEditor: FC<Props> = ({ bugshot, screenshot }) => {
   const { connection, isLoading, update } = useConnection();
 
   if (isLoading || !bugshot) {
@@ -29,11 +29,5 @@ const Editor: FC<Props> = ({ bugshot, screenshot }) => {
     />
   );
 };
-
-const IssueEditor: FC<Props> = (props) => (
-  <div tw="p-8 max-w-md">
-    <Editor {...props} />
-  </div>
-);
 
 export default IssueEditor;

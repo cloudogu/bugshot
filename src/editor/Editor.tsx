@@ -3,6 +3,7 @@ import ImageEditor from "./ImageEditor";
 import IssueEditor from "./IssueEditor";
 import { Screenshot } from "./Screenshot";
 import useBugShot from "./useBugShot";
+import Tabs, { Tab } from "./Tabs";
 import "twin.macro";
 
 const createScreenshot = (stageRef: MutableRefObject<any>): Screenshot => {
@@ -12,7 +13,7 @@ const createScreenshot = (stageRef: MutableRefObject<any>): Screenshot => {
         pixelRatio: stageRef.current._pixelRatio,
       }) as HTMLCanvasElement;
       return new Promise<Blob | null>((resolve) => {
-        canvas.toBlob(blob => resolve(blob));
+        canvas.toBlob((blob) => resolve(blob));
       });
     },
   };
@@ -28,7 +29,14 @@ const Editor: FC = () => {
         <ImageEditor stageRef={stageRef} image={bugshot?.screenshotUrl} />
       </main>
       <aside tw="w-1/4 h-full">
-        <IssueEditor screenshot={screenshot} bugshot={bugshot} />
+        <Tabs>
+          <Tab title="Create Issue">
+            <IssueEditor screenshot={screenshot} bugshot={bugshot} />
+          </Tab>
+          <Tab title="Templates">
+            <p>Edit some templates</p>
+          </Tab>
+        </Tabs>
       </aside>
     </div>
   );
