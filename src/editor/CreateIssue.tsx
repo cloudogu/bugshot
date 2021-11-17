@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
-import useCreateIssue, { CreatedIssue, Issue } from "./useCreateIssue";
-import { Screenshot } from "./Screenshot";
+import useCreateIssue, { CreatedIssue } from "./useCreateIssue";
+import { Screenshot } from "../api/types";
 import InputField from "../form/InputField";
 import Button from "../form/Button";
 import { Connection } from "./useConnection";

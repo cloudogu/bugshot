@@ -1,10 +1,11 @@
 import React, { FC, MutableRefObject, useRef } from "react";
 import ImageEditor from "./ImageEditor";
 import IssueEditor from "./IssueEditor";
-import { Screenshot } from "./Screenshot";
 import useBugShot from "./useBugShot";
 import Tabs, { Tab } from "./Tabs";
 import "twin.macro";
+import TemplateEditor from "./TemplateEditor";
+import { Screenshot } from "../api/types";
 
 const createScreenshot = (stageRef: MutableRefObject<any>): Screenshot => {
   return {
@@ -34,7 +35,7 @@ const Editor: FC = () => {
             <IssueEditor screenshot={screenshot} bugshot={bugshot} />
           </Tab>
           <Tab title="Templates">
-            <p>Edit some templates</p>
+            <TemplateEditor />
           </Tab>
         </Tabs>
       </aside>

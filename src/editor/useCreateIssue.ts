@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Screenshot } from "./Screenshot";
-import { Template } from "./useTemplates";
+import { Screenshot } from "../api/types";
+import { Template } from "../api/types";
 import useRedmineApi from "./useRedmineApi";
 
 export type Issue = {

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import createRedmineApi from "./api";
+
+import { connection as store } from "../api/store";
+import createRedmineApi from "../api/redmine";
 
 export type Connection = {
   url: string;
@@ -13,12 +15,7 @@ const useConnection = () => {
   const [errorOnUpdate, setErrorOnUpdate] = useState<Error>();
 
   useEffect(() => {
-    chrome.storage.sync.get("connection", (result) => {
-      if (result.connection) {
-        setConnection(JSON.parse(result.connection));
-      }
-      setIsLoading(false);
-    });
+    store().get().then(setConnection).then(() => setIsLoading(false));
   }, []);
 
   const updateConnection = (connection: Connection) => {
@@ -27,12 +24,7 @@ const useConnection = () => {
     const api = createRedmineApi(connection);
     api
       .me()
-      .then(() => {
-        chrome.storage.sync.set(
-          { connection: JSON.stringify(connection) },
-          () => setConnection(connection)
-        );
-      })
+      .then(store().set)
       .catch(setErrorOnUpdate)
       .finally(() => setUpdateIsLoading(false));
   };

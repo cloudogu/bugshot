@@ -9,6 +9,7 @@ module.exports = {
   devtool: "cheap-module-source-map",
   entry: {
     background: "./src/background.ts",
+    content: "./src/content.ts",
     screenshot: "./src/screenshot.ts",
     editor: "./src/editor.tsx",
   },

@@ -1,3 +1,7 @@
+import { converIssueToTemplate } from "./api/convert";
+import { connection, template } from "./api/store";
+import createRedmineApi from "./api/redmine";
+
 // To make sure we can uniquely identify each screenshot tab, add an id as a
 // query param to the url that displays the screenshot.
 let id = 100;
@@ -28,19 +32,18 @@ const createBugShot = (capturedTab: chrome.tabs.Tab) => {
       for (var i = 0; i < views.length; i++) {
         var view = views[i];
         if (view.location.href == viewTabUrl) {
-
           let resolution;
           if (capturedTab.width && capturedTab.height) {
             resolution = {
               width: capturedTab.width,
-              height: capturedTab.height
+              height: capturedTab.height,
             };
           }
 
           const bugshot: BugShot = {
             url: capturedTab.url,
             screenshotUrl,
-            resolution
+            resolution,
           };
 
           // @ts-ignore
@@ -57,17 +60,15 @@ const createBugShot = (capturedTab: chrome.tabs.Tab) => {
       targetId = tab.id;
     });
   });
-
 };
 
 // Listen for a click on the camera icon. On that click, take a screenshot.
 chrome.browserAction.onClicked.addListener(() => {
-  chrome.tabs.query(({active: true}), tabs => {
+  chrome.tabs.query({ active: true }, (tabs) => {
     if (tabs && tabs.length === 1) {
       createBugShot(tabs[0]);
     }
   });
-  
 });
 
 chrome.notifications.onButtonClicked.addListener(
@@ -78,3 +79,27 @@ chrome.notifications.onButtonClicked.addListener(
     }
   }
 );
+
+// send message to content script, if the new tab url is the confiured redmine url
+chrome.tabs.onUpdated.addListener(function (tabId, _, tab) {
+  connection()
+    .get()
+    .then((c) => {
+      if (tab.url && tab.url.startsWith(`${c.url}/issues`)) {
+        chrome.tabs.sendMessage(tabId, {
+          type: "bugshot_url",
+        });
+      }
+    });
+});
+
+chrome.runtime.onMessage.addListener(function (msg) {
+  if (msg.name && msg.url) {
+    connection()
+      .get()
+      .then(createRedmineApi)
+      .then((api) => api.issue(`${msg.url}.json`))
+      .then(converIssueToTemplate)
+      .then((tpl) => template().set(msg.name, tpl));
+  }
+});

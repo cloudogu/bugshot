@@ -1,28 +1,4 @@
-import { Screenshot } from "./Screenshot";
-import { Template } from "./useTemplates";
-
-export type Connection = {
-  url: string;
-  apiKey: string;
-};
-
-type UploadResponse = {
-  upload: {
-    token: string;
-  };
-};
-
-export type Upload = {
-  token: string;
-  filename: string;
-  content_type: string;
-};
-
-export type Issue = Template & {
-  subject: string;
-  description?: string;
-  uploads: Upload[];
-};
+import { Connection, Enumeration, CreateIssueRequest, Project, Screenshot, UploadResponse, Issue } from "./types";
 
 const createRedmineApi = (connection: Connection) => {
   let baseUrl = connection.url;
@@ -30,8 +6,15 @@ const createRedmineApi = (connection: Connection) => {
     baseUrl += "/";
   }
 
-  const get = (uri: string) =>
-    fetch(`${baseUrl}/${uri}`, {
+  const get = (uri: string) => {
+    let request = uri;
+    if (!uri.includes("://")) {
+      request = `${baseUrl}/${uri}`;
+    }
+
+    console.log(uri, request);
+
+    return fetch(request, {
       headers: {
         "X-Redmine-API-Key": connection.apiKey,
       },
@@ -42,7 +25,8 @@ const createRedmineApi = (connection: Connection) => {
         throw new Error("request failed");
       }
       return response.json();
-    });
+    })
+  };
 
   const upload = (screenshot: Screenshot, filename: string) =>
     screenshot
@@ -74,7 +58,7 @@ const createRedmineApi = (connection: Connection) => {
       .then((response) => response.json())
       .then((upload: UploadResponse) => upload.upload.token);
 
-  const create = (issue: Issue) =>
+  const create = (issue: CreateIssueRequest) =>
     fetch(`${baseUrl}issues.json`, {
       method: "POST",
       headers: {
@@ -99,8 +83,17 @@ const createRedmineApi = (connection: Connection) => {
 
   return {
     me: () => get("my/account.json"),
+    projects: (): Promise<Project[]> =>
+      get("projects.json?include=trackers,issue_categories").then(
+        (json) => json.projects
+      ),
+    priorities: (): Promise<Enumeration[]> =>
+      get("enumerations/issue_priorities.json").then(
+        (json) => json.issue_priorities
+      ),
     upload,
     create,
+    issue: (url: string): Promise<Issue> => get(url).then((json) => json.issue)
   };
 };
 
