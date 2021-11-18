@@ -12,6 +12,7 @@ module.exports = {
     content: "./src/content.ts",
     screenshot: "./src/screenshot.ts",
     editor: "./src/editor.tsx",
+    connection: "./src/connection.tsx"
   },
   module: {
     rules: [

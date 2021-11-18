@@ -1,12 +1,12 @@
+import CreateConnection from "./connection/CreateConnection";
 import React from "react";
 import ReactDOM from "react-dom";
 import GlobalStyles from "./styles/GlobalStyles";
-import Editor from "./editor/Editor";
 
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyles />
-    <Editor />
+    <CreateConnection />
   </React.StrictMode>,
   document.getElementById("root")
 );

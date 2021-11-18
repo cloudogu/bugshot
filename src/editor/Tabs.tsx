@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, ReactNode, useState } from "react";
-import Title from "./Title";
+import Title from "../form/Title";
 import tw from "twin.macro";
 
 type TabProps = {

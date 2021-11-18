@@ -6,7 +6,7 @@ const getFromStore = (key: string) =>
       if (result[key]) {
         resolve(result[key]);
       } else {
-        resolve({});
+        resolve(undefined);
       }
     });
   });

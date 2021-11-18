@@ -62,14 +62,23 @@ const createBugShot = (capturedTab: chrome.tabs.Tab) => {
   });
 };
 
-// Listen for a click on the camera icon. On that click, take a screenshot.
-chrome.browserAction.onClicked.addListener(() => {
-  chrome.tabs.query({ active: true }, (tabs) => {
-    if (tabs && tabs.length === 1) {
-      createBugShot(tabs[0]);
-    }
+const configureListener = () => {
+  chrome.browserAction.setPopup({popup: ''})
+  chrome.browserAction.onClicked.addListener(() => {
+    chrome.tabs.query({ active: true }, (tabs) => {
+      if (tabs && tabs.length === 1) {
+        createBugShot(tabs[0]);
+      }
+    });
   });
+};
+
+connection().get().then(c => {
+  if (c) {
+    configureListener();
+  }
 });
+
 
 chrome.notifications.onButtonClicked.addListener(
   (notifId: string, btnIdx: number) => {
@@ -94,7 +103,9 @@ chrome.tabs.onUpdated.addListener(function (tabId, _, tab) {
 });
 
 chrome.runtime.onMessage.addListener(function (msg) {
-  if (msg.name && msg.url) {
+  if (msg.type === "connection_stored") {
+    configureListener();
+  } else if (msg.name && msg.url) {
     connection()
       .get()
       .then(createRedmineApi)

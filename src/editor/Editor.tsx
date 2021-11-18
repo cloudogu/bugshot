@@ -3,9 +3,9 @@ import ImageEditor from "./ImageEditor";
 import IssueEditor from "./IssueEditor";
 import useBugShot from "./useBugShot";
 import Tabs, { Tab } from "./Tabs";
-import "twin.macro";
 import TemplateEditor from "./TemplateEditor";
 import { Screenshot } from "../api/types";
+import "twin.macro";
 
 const createScreenshot = (stageRef: MutableRefObject<any>): Screenshot => {
   return {

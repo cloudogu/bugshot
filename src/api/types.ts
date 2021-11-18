@@ -3,6 +3,12 @@ export type Connection = {
   apiKey: string;
 };
 
+export type InitialConnection = {
+  url: string;
+  username: string;
+  password: string;
+};
+
 export type UploadResponse = {
   upload: {
     token: string;
@@ -93,4 +99,16 @@ export type Issue = {
   subject: string;
   description: string;
   custom_fields: CustomField[];
+};
+
+export type Me = {
+  id: number;
+  login: string;
+  admin: boolean;
+  firstname: string;
+  lastname: string;
+  mail: string;
+  created_on: string;
+  last_login_on: string;
+  api_key: string;
 };

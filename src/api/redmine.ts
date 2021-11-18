@@ -1,23 +1,36 @@
-import { Connection, Enumeration, CreateIssueRequest, Project, Screenshot, UploadResponse, Issue } from "./types";
+import { Connection, Enumeration, CreateIssueRequest, Project, Screenshot, UploadResponse, Issue, InitialConnection, Me } from "./types";
 
-const createRedmineApi = (connection: Connection) => {
+type RemdineConnection = Connection | InitialConnection;
+
+const isInitialConnection = (connection: RemdineConnection): connection is InitialConnection => {
+  return (connection as InitialConnection).username !== undefined;
+}
+
+const createRedmineApi = (connection: RemdineConnection) => {
   let baseUrl = connection.url;
   if (!baseUrl.endsWith("/")) {
     baseUrl += "/";
   }
 
+  let headers: HeadersInit;
+  if (isInitialConnection(connection)) {
+    headers = {
+      Authorization: 'Basic ' + btoa(connection.username + ":" + connection.password)
+    }
+  } else {
+    headers = {
+      "X-Redmine-API-Key": connection.apiKey,
+    }
+  }
+  
   const get = (uri: string) => {
     let request = uri;
     if (!uri.includes("://")) {
       request = `${baseUrl}/${uri}`;
     }
 
-    console.log(uri, request);
-
     return fetch(request, {
-      headers: {
-        "X-Redmine-API-Key": connection.apiKey,
-      },
+      headers: headers,
       // do not prompt for basic auth if key authentication failed
       credentials: "omit",
     }).then((response) => {
@@ -40,7 +53,7 @@ const createRedmineApi = (connection: Connection) => {
       .then((blob) =>
         fetch(`${baseUrl}uploads.json?filename=${filename}`, {
           headers: {
-            "X-Redmine-API-Key": connection.apiKey,
+            ...headers,
             "Content-Type": "application/octet-stream",
           },
           // do not prompt for basic auth if key authentication failed
@@ -62,7 +75,7 @@ const createRedmineApi = (connection: Connection) => {
     fetch(`${baseUrl}issues.json`, {
       method: "POST",
       headers: {
-        "X-Redmine-API-Key": connection.apiKey,
+        ...headers,
         "Content-Type": "application/json",
       },
       // do not prompt for basic auth if key authentication failed
@@ -82,7 +95,7 @@ const createRedmineApi = (connection: Connection) => {
       }));
 
   return {
-    me: () => get("my/account.json"),
+    me: (): Promise<Me> => get("my/account.json").then(json => json.user),
     projects: (): Promise<Project[]> =>
       get("projects.json?include=trackers,issue_categories").then(
         (json) => json.projects

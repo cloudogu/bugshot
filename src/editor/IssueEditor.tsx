@@ -1,7 +1,7 @@
 import React, { FC } from "react";
+import ErrorNotification from "../form/ErrorNotification";
 import useConnection from "./useConnection";
-import CreateConnection from "./CreateConnection";
-import { Screenshot } from "./Screenshot";
+import { Screenshot } from "../api/types";
 import CreateIssue from "./CreateIssue";
 import "twin.macro";
 
@@ -11,14 +11,14 @@ type Props = {
 };
 
 const IssueEditor: FC<Props> = ({ bugshot, screenshot }) => {
-  const { connection, isLoading, update } = useConnection();
+  const { connection, isLoading } = useConnection();
 
   if (isLoading || !bugshot) {
     return <p>Loading ...</p>;
   }
 
   if (!connection) {
-    return <CreateConnection {...update} />;
+    return <ErrorNotification error="Connection not configured" />
   }
 
   return (
