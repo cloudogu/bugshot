@@ -1,3 +1,12 @@
+export type BugShot = {
+  url?: string;
+  screenshotUrl: string;
+  resolution?: {
+    width: number;
+    height: number;
+  }
+}
+
 export type Connection = {
   url: string;
   apiKey: string;

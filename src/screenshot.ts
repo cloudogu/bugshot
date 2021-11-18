@@ -1,11 +1,4 @@
-type BugShot = {
-  url?: string;
-  screenshotUrl: string;
-  resolution?: {
-    width: number;
-    height: number;
-  }
-}
+import { BugShot } from "./api/types"
 
 // @ts-ignore
 window.onBugShot = (bugshot: BugShot) => {

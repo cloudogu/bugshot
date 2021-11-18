@@ -7,11 +7,6 @@ const isInitialConnection = (connection: RemdineConnection): connection is Initi
 }
 
 const createRedmineApi = (connection: RemdineConnection) => {
-  let baseUrl = connection.url;
-  if (!baseUrl.endsWith("/")) {
-    baseUrl += "/";
-  }
-
   let headers: HeadersInit;
   if (isInitialConnection(connection)) {
     headers = {
@@ -26,7 +21,7 @@ const createRedmineApi = (connection: RemdineConnection) => {
   const get = (uri: string) => {
     let request = uri;
     if (!uri.includes("://")) {
-      request = `${baseUrl}/${uri}`;
+      request = connection.url + uri;
     }
 
     return fetch(request, {
@@ -51,7 +46,7 @@ const createRedmineApi = (connection: RemdineConnection) => {
         return blob;
       })
       .then((blob) =>
-        fetch(`${baseUrl}uploads.json?filename=${filename}`, {
+        fetch(`${connection.url}/uploads.json?filename=${filename}`, {
           headers: {
             ...headers,
             "Content-Type": "application/octet-stream",
@@ -72,7 +67,7 @@ const createRedmineApi = (connection: RemdineConnection) => {
       .then((upload: UploadResponse) => upload.upload.token);
 
   const create = (issue: CreateIssueRequest) =>
-    fetch(`${baseUrl}issues.json`, {
+    fetch(`${connection.url}/issues.json`, {
       method: "POST",
       headers: {
         ...headers,
@@ -91,17 +86,17 @@ const createRedmineApi = (connection: RemdineConnection) => {
       .then((response) => response.json())
       .then((data) => ({
         id: data.issue.id,
-        url: `${baseUrl}issues/${data.issue.id}`,
+        url: `${connection.url}/issues/${data.issue.id}`,
       }));
 
   return {
-    me: (): Promise<Me> => get("my/account.json").then(json => json.user),
+    me: (): Promise<Me> => get("/my/account.json").then(json => json.user),
     projects: (): Promise<Project[]> =>
-      get("projects.json?include=trackers,issue_categories").then(
+      get("/projects.json?include=trackers,issue_categories").then(
         (json) => json.projects
       ),
     priorities: (): Promise<Enumeration[]> =>
-      get("enumerations/issue_priorities.json").then(
+      get("/enumerations/issue_priorities.json").then(
         (json) => json.issue_priorities
       ),
     upload,

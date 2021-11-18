@@ -1,42 +1,32 @@
 import React, { FC } from "react";
-import useTemplates from "./useTemplates";
-import "twin.macro";
+import { TemplateEntry } from "./useTemplates";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import useRemoveTemplate from "./useRemoveTemplate";
-import Spinner from "../form/Spinner";
+import "twin.macro";
 
-type Props = {
-  name: string;
+type LineProps = {
+  template: TemplateEntry;
 };
 
-const TemplateLine: FC<Props> = ({ name }) => {
-  const { isLoading, remove } = useRemoveTemplate();
+const TemplateLine: FC<LineProps> = ({ template }) => (
+  <li tw="w-full p-2 text-sm">
+    <span>{template.name}</span>
+    <button tw="float-right w-4 h-4" onClick={template.remove}>
+      <FontAwesomeIcon icon={faTrash} />
+    </button>
+  </li>
+);
 
-  return (
-    <li tw="w-full">
-      <span>{name}</span>
-      <button
-        tw="float-right"
-        onClick={() => remove(name)}
-        disabled={isLoading}
-      >
-        {isLoading ? <Spinner /> : <FontAwesomeIcon icon={faTrash} />}
-      </button>
-    </li>
-  );
+type EditorProps = {
+  templates: TemplateEntry[];
 };
 
-const TemplateEditor: FC = ({}) => {
-  const { templates } = useTemplates();
-
-  return (
-    <ul tw="w-full mt-4">
-      {Object.keys(templates).map((name) => (
-        <TemplateLine key={name} name={name} />
-      ))}
-    </ul>
-  );
-};
+const TemplateEditor: FC<EditorProps> = ({ templates }) => (
+  <ul tw="w-full mt-4">
+    {templates.map((template) => (
+      <TemplateLine key={template.name} template={template} />
+    ))}
+  </ul>
+);
 
 export default TemplateEditor;

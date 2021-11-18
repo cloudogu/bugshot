@@ -1,8 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import "twin.macro";
 
-const Spinner = () => (
+type Props = {
+  className?: string;
+};
+
+const Spinner: FC<Props> = ({ className }) => (
   <svg
+    className={className}
     tw="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"

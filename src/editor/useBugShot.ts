@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BugShot } from "api/types";
 
 const useBugShot = () => {
   const [bugshot, setBugShot] = useState<BugShot>();

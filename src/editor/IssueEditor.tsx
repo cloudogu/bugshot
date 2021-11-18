@@ -1,16 +1,18 @@
 import React, { FC } from "react";
 import ErrorNotification from "../form/ErrorNotification";
 import useConnection from "./useConnection";
-import { Screenshot } from "../api/types";
+import { BugShot, Screenshot } from "../api/types";
 import CreateIssue from "./CreateIssue";
 import "twin.macro";
+import { TemplateEntry } from "./useTemplates";
 
 type Props = {
   bugshot?: BugShot;
   screenshot: Screenshot;
+  templates: TemplateEntry[];
 };
 
-const IssueEditor: FC<Props> = ({ bugshot, screenshot }) => {
+const IssueEditor: FC<Props> = ({ bugshot, screenshot, templates }) => {
   const { connection, isLoading } = useConnection();
 
   if (isLoading || !bugshot) {
@@ -18,7 +20,7 @@ const IssueEditor: FC<Props> = ({ bugshot, screenshot }) => {
   }
 
   if (!connection) {
-    return <ErrorNotification error="Connection not configured" />
+    return <ErrorNotification error="Connection not configured" />;
   }
 
   return (
@@ -26,6 +28,7 @@ const IssueEditor: FC<Props> = ({ bugshot, screenshot }) => {
       connection={connection}
       bugshot={bugshot}
       screenshot={screenshot}
+      templates={templates}
     />
   );
 };
