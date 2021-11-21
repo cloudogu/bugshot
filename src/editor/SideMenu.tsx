@@ -5,6 +5,7 @@ import { BugShot, Screenshot } from "../api/types";
 import Tabs, { Tab } from "./Tabs";
 import useTemplates from "./useTemplates";
 import Spinner from "../form/Spinner";
+import TemplateTutorial from "./TemplateTutorial";
 
 type Props = {
   screenshot: Screenshot;
@@ -16,12 +17,20 @@ const Container: FC = ({ children }) => (
 );
 
 const SideMenu: FC<Props> = ({ screenshot, bugshot }) => {
-  const { entries, isLoading } = useTemplates();
+  const { entries, isLoading, reload } = useTemplates();
 
   if (isLoading) {
     return (
       <Container>
         <Spinner />
+      </Container>
+    );
+  }
+
+  if (entries.length === 0) {
+    return (
+      <Container>
+        <TemplateTutorial reload={reload} />
       </Container>
     );
   }

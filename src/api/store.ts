@@ -77,7 +77,8 @@ export const template = () => {
   const get = () => getFromStore("templates") as Promise<Templates>;
   const set = (name: string, template: Template) =>
     get()
-      .then((templates) => {
+      .then((tpls) => {
+        const templates = tpls || {};
         templates[name] = template;
         return { templates };
       })

@@ -11,6 +11,7 @@ export type TemplateEntry = {
 const useTemplates = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [entries, setEntries] = useState<TemplateEntry[]>([]);
+  const [counter, setCounter] = useState(0);
 
   const remove = (name: string) => {
     template()
@@ -21,6 +22,7 @@ const useTemplates = () => {
   useEffect(() => {
     template()
       .get()
+      .then((templates) => templates || {})
       .then((templates) =>
         Object.keys(templates).map((name) => ({
           name,
@@ -30,11 +32,12 @@ const useTemplates = () => {
       )
       .then(setEntries)
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [counter]);
 
   return {
     isLoading,
     entries,
+    reload: () => setCounter((c) => ++c),
   };
 };
 
