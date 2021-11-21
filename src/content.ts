@@ -1,5 +1,5 @@
 function addBugShotLink() {
-  const link = document.querySelector("add_as_bugshot_template");
+  const link = document.querySelector("#add_as_bugshot_template");
   if (link) {
     // bugshot link is alredy available, exit
     return;
