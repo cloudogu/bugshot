@@ -34,9 +34,15 @@ const CreateConnection: FC = () => {
       <FormContainer>
         <InputField
           label="URL"
+          autoFocus={true}
           {...register("url", { required: true })}
           error={errors.url && "Url is required"}
         />
+        <p tw="bg-blue-500 rounded-md p-4 text-white">
+          The credentials are used only to retrieve the api key from Redmine.
+          The api key is used for every further request.
+          The key is stored encrypted in the browser's snychronized storage.
+        </p>
         <InputField
           label="Username"
           {...register("username", { required: true })}

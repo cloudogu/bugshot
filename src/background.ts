@@ -63,15 +63,18 @@ const createBugShot = (capturedTab: chrome.tabs.Tab) => {
   });
 };
 
+const browserActionListener = () => {
+  chrome.tabs.query({ active: true }, (tabs) => {
+    if (tabs && tabs.length === 1) {
+      createBugShot(tabs[0]);
+    }
+  });
+};
+
 const configureListener = () => {
   chrome.browserAction.setPopup({ popup: "" });
-  chrome.browserAction.onClicked.addListener(() => {
-    chrome.tabs.query({ active: true }, (tabs) => {
-      if (tabs && tabs.length === 1) {
-        createBugShot(tabs[0]);
-      }
-    });
-  });
+  chrome.browserAction.onClicked.removeListener(browserActionListener);
+  chrome.browserAction.onClicked.addListener(browserActionListener);
 };
 
 connection()
@@ -114,10 +117,8 @@ chrome.runtime.onMessage.addListener(function (msg) {
         chrome.browserAction.setPopup({ popup: "connection.html" });
         const view = chrome.extension
           .getViews()
-          .find((v) => v.location.href.includes("/screenshot.html"));
-        if (view) {
-          view.close();
-        }
+          .filter((v) => v.location.href.includes("/screenshot.html"))
+          .forEach((v) => v.close());
       });
   } else if (msg.name && msg.url) {
     connection()
