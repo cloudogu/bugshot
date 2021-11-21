@@ -5,15 +5,18 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "twin.macro";
 
 type LineProps = {
+  templates: TemplateEntry[];
   template: TemplateEntry;
 };
 
-const TemplateLine: FC<LineProps> = ({ template }) => (
+const TemplateLine: FC<LineProps> = ({ templates, template }) => (
   <li tw="w-full p-2 text-sm">
     <span>{template.name}</span>
-    <button tw="float-right w-4 h-4" onClick={template.remove}>
-      <FontAwesomeIcon icon={faTrash} />
-    </button>
+    {templates.length > 1 ? (
+      <button tw="float-right w-4 h-4" onClick={template.remove}>
+        <FontAwesomeIcon icon={faTrash} />
+      </button>
+    ) : null}
   </li>
 );
 
@@ -24,7 +27,11 @@ type EditorProps = {
 const TemplateEditor: FC<EditorProps> = ({ templates }) => (
   <ul tw="w-full mt-4">
     {templates.map((template) => (
-      <TemplateLine key={template.name} template={template} />
+      <TemplateLine
+        key={template.name}
+        templates={templates}
+        template={template}
+      />
     ))}
   </ul>
 );
