@@ -1,5 +1,6 @@
 import { converIssueToTemplate } from "./api/convert";
 import { connection, template } from "./api/store";
+import { BugShot } from "./api/types";
 import createRedmineApi from "./api/redmine";
 
 // To make sure we can uniquely identify each screenshot tab, add an id as a
@@ -63,7 +64,7 @@ const createBugShot = (capturedTab: chrome.tabs.Tab) => {
 };
 
 const configureListener = () => {
-  chrome.browserAction.setPopup({popup: ''})
+  chrome.browserAction.setPopup({ popup: "" });
   chrome.browserAction.onClicked.addListener(() => {
     chrome.tabs.query({ active: true }, (tabs) => {
       if (tabs && tabs.length === 1) {
@@ -73,12 +74,13 @@ const configureListener = () => {
   });
 };
 
-connection().get().then(c => {
-  if (c) {
-    configureListener();
-  }
-});
-
+connection()
+  .get()
+  .then((c) => {
+    if (c) {
+      configureListener();
+    }
+  });
 
 chrome.notifications.onButtonClicked.addListener(
   (notifId: string, btnIdx: number) => {
@@ -105,6 +107,18 @@ chrome.tabs.onUpdated.addListener(function (tabId, _, tab) {
 chrome.runtime.onMessage.addListener(function (msg) {
   if (msg.type === "connection_stored") {
     configureListener();
+  } else if (msg.type === "logout") {
+    connection()
+      .remove()
+      .then(() => {
+        chrome.browserAction.setPopup({ popup: "connection.html" });
+        const view = chrome.extension
+          .getViews()
+          .find((v) => v.location.href.includes("/screenshot.html"));
+        if (view) {
+          view.close();
+        }
+      });
   } else if (msg.name && msg.url) {
     connection()
       .get()

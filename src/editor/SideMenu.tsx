@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import IssueEditor from "./IssueEditor";
-import TemplateEditor from "./TemplateEditor";
+import TemplateEditor from "./Settings";
 import { BugShot, Screenshot } from "../api/types";
 import Tabs, { Tab } from "./Tabs";
 import useTemplates from "./useTemplates";

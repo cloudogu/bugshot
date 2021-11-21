@@ -31,23 +31,32 @@ const getFromStore = (key: string) =>
   });
 
 const setInStore = (items: { [key: string]: any }) =>
-  new Promise((resolve) => {
-    chrome.storage.sync.set(items, () => resolve(undefined));
-  });
+  new Promise((resolve) =>
+    chrome.storage.sync.set(items, () => resolve(undefined))
+  );
+
+const removeFromStore = (key: string) =>
+  new Promise((resolve) =>
+    chrome.storage.sync.remove(key, () => resolve(undefined))
+  );
 
 const getStoredConnection = () =>
   getFromStore("connection") as Promise<StoredConnection>;
 
 export const connection = () => {
   const get = () =>
-    getStoredConnection()
-      .then((storedConnection: StoredConnection) => ({
+    getStoredConnection().then((storedConnection: StoredConnection) => {
+      if (!storedConnection) {
+        return undefined;
+      }
+      return {
         url: storedConnection.url,
         apiKey: AES.decrypt(
           storedConnection.apiKey,
           keyPrefix + storedConnection.keySuffix
         ).toString(enc.Utf8),
-      })) as Promise<Connection>;
+      };
+    }) as Promise<Connection>;
 
   const set = (connection: Connection) => {
     const keySuffix = random(8);
@@ -59,7 +68,9 @@ export const connection = () => {
     return setInStore({ connection: storedConnection });
   };
 
-  return { get, set };
+  const remove = () => removeFromStore("connection");
+
+  return { get, set, remove };
 };
 
 export const template = () => {
