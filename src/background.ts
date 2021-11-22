@@ -64,17 +64,21 @@ const createBugShot = (capturedTab: chrome.tabs.Tab) => {
 };
 
 const browserActionListener = () => {
-  chrome.tabs.query({ active: true }, (tabs) => {
-    if (tabs && tabs.length === 1) {
-      createBugShot(tabs[0]);
+  chrome.tabs.query(
+    { active: true, windowId: chrome.windows.WINDOW_ID_CURRENT },
+    (tabs) => {
+      if (tabs && tabs.length === 1) {
+        createBugShot(tabs[0]);
+      }
     }
-  });
+  );
 };
 
 const configureListener = () => {
   chrome.browserAction.setPopup({ popup: "" });
-  chrome.browserAction.onClicked.removeListener(browserActionListener);
-  chrome.browserAction.onClicked.addListener(browserActionListener);
+  if (!chrome.browserAction.onClicked.hasListener(browserActionListener)) {
+    chrome.browserAction.onClicked.addListener(browserActionListener);
+  }
 };
 
 connection()
