@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import IssueEditor from "./IssueEditor";
-import TemplateEditor from "./Settings";
+import Settings from "./Settings";
 import { BugShot, Screenshot } from "../api/types";
 import Tabs, { Tab } from "./Tabs";
 import useTemplates from "./useTemplates";
@@ -46,7 +46,7 @@ const SideMenu: FC<Props> = ({ screenshot, bugshot }) => {
           />
         </Tab>
         <Tab title="Settings">
-          <TemplateEditor templates={entries} />
+          <Settings templates={entries} />
         </Tab>
       </Tabs>
     </Container>
