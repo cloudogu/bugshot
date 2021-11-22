@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Screenshot } from "../api/types";
+import { Screenshot, BugShot } from "../api/types";
 import { Template } from "../api/types";
 import useRedmineApi from "./useRedmineApi";
 

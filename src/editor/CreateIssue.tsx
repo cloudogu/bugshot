@@ -42,6 +42,9 @@ const CreateIssue: FC<Props> = ({
     if (!template) {
       throw new Error(`could not find template ${issue.template}`);
     }
+    if (!bugshot) {
+      throw new Error(`BugShot is undefined`);
+    }
     create(
       {
         subject: issue.subject,
