@@ -46,9 +46,12 @@ export type Template = {
   custom_fields: CustomField[];
 };
 
-export type Templates = {
-  [key: string]: Template;
-};
+export type NamedTemplate = {
+  name: string;
+  template: Template;
+}
+
+export type Templates = NamedTemplate[];
 
 export type CreateIssueRequest = Template & {
   subject: string;

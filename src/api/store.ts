@@ -78,18 +78,38 @@ export const template = () => {
   const set = (name: string, template: Template) =>
     get()
       .then((tpls) => {
-        const templates = tpls || {};
-        templates[name] = template;
+        const templates = tpls || [];
+        templates.unshift({ name, template });
         return { templates };
       })
       .then(setInStore);
   const remove = (name: string) =>
     get()
-      .then((templates) => {
-        delete templates[name];
+      .then((tpls) => {
+        const templates = (tpls || []).filter((t) => t.name !== name);
         return { templates };
       })
       .then(setInStore);
 
-  return { get, set, remove };
+  const moveTopTop = (name: string) =>
+    get()
+      .then((tpls) => {
+        const templates = tpls || [];
+        console.log(templates);
+        const template = templates.find((t) => t.name === name);
+        console.log(template);
+
+        if (template) {
+          const newTemplates = templates.filter((t) => t && t.name !== name);
+          newTemplates.unshift(template);
+          console.log(newTemplates);
+          return {
+            templates: newTemplates,
+          };
+        }
+        return { templates };
+      })
+      .then(setInStore);
+
+  return { get, set, remove, moveTopTop };
 };

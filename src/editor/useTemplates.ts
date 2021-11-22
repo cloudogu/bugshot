@@ -6,6 +6,7 @@ export type TemplateEntry = {
   name: string;
   template: Template;
   remove: () => void;
+  moveToTop: () => void;
 };
 
 const useTemplates = () => {
@@ -13,21 +14,27 @@ const useTemplates = () => {
   const [entries, setEntries] = useState<TemplateEntry[]>([]);
   const [counter, setCounter] = useState(0);
 
+  const increase = () => setCounter((c) => ++c);
+
   const remove = (name: string) => {
     template()
       .remove(name)
       .then(() => setEntries((e) => [...e.filter((e) => e.name !== name)]));
   };
 
+  const moveToTop = (name: string) => {
+    template().moveTopTop(name).then(increase);
+  };
+
   useEffect(() => {
     template()
       .get()
-      .then((templates) => templates || {})
+      .then((templates) => templates || [])
       .then((templates) =>
-        Object.keys(templates).map((name) => ({
-          name,
-          template: templates[name],
-          remove: () => remove(name),
+        templates.map((t) => ({
+          ...t,
+          remove: () => remove(t.name),
+          moveToTop: () => moveToTop(t.name),
         }))
       )
       .then(setEntries)

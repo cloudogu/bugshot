@@ -53,11 +53,13 @@ const CreateIssue: FC<Props> = ({
         screenshot,
       },
       bugshot,
-      close
+      (issue: CreatedIssue) => close(issue, template)
     );
   };
 
-  const close = (issue: CreatedIssue) => {
+  const close = (issue: CreatedIssue, template: TemplateEntry) => {
+    template.moveToTop();
+
     chrome.notifications.create(
       `bugshot-${connection.url}/issues/${issue.id}`,
       {
