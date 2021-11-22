@@ -1,14 +1,14 @@
 import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import InputField from "../form/InputField";
-import Button from "../form/Button";
+import InputField from "../shared/InputField";
+import Button from "../shared/Button";
 import "twin.macro";
-import ErrorNotification from "../form/ErrorNotification";
-import FormContainer from "../form/FormContainer";
-import Title from "../form/Title";
+import ErrorNotification from "../shared/ErrorNotification";
+import FormContainer from "../shared/FormContainer";
+import Title from "../shared/Title";
 import useCreateConnection from "./useCreateConnection";
 import { InitialConnection } from "api/types";
-import GettingStarted from "../form/GettingStarted";
+import GettingStarted from "../shared/GettingStarted";
 
 const CreateConnection: FC = () => {
   const { create, isLoading, error } = useCreateConnection();

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import ErrorNotification from "../form/ErrorNotification";
+import ErrorNotification from "../shared/ErrorNotification";
 import useConnection from "./useConnection";
 import { BugShot, Screenshot } from "../api/types";
 import CreateIssue from "./CreateIssue";

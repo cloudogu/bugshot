@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { TemplateEntry } from "./useTemplates";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import Button from "../form/Button";
+import Button from "../shared/Button";
 import "twin.macro";
 
 type LineProps = {

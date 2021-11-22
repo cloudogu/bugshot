@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import GettingStarted from "../form/GettingStarted";
-import Button from "../form/Button";
+import GettingStarted from "../shared/GettingStarted";
+import Button from "../shared/Button";
 import "twin.macro";
 
 type Props = {

@@ -4,7 +4,7 @@ import TemplateEditor from "./Settings";
 import { BugShot, Screenshot } from "../api/types";
 import Tabs, { Tab } from "./Tabs";
 import useTemplates from "./useTemplates";
-import Spinner from "../form/Spinner";
+import Spinner from "../shared/Spinner";
 import TemplateTutorial from "./TemplateTutorial";
 
 type Props = {

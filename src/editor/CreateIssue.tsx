@@ -2,13 +2,13 @@ import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 import useCreateIssue, { CreatedIssue } from "./useCreateIssue";
 import { Screenshot, BugShot } from "../api/types";
-import InputField from "../form/InputField";
-import Button from "../form/Button";
+import InputField from "../shared/InputField";
+import Button from "../shared/Button";
 import { Connection } from "./useConnection";
-import Textarea from "../form/Textarea";
-import ErrorNotification from "../form/ErrorNotification";
-import FormContainer from "../form/FormContainer";
-import Select from "../form/Select";
+import Textarea from "../shared/Textarea";
+import ErrorNotification from "../shared/ErrorNotification";
+import FormContainer from "../shared/FormContainer";
+import Select from "../shared/Select";
 import { TemplateEntry } from "./useTemplates";
 
 type Props = {
