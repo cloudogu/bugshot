@@ -91,6 +91,8 @@ export const template = () => {
       })
       .then(setInStore);
 
+  const removeAll = () => removeFromStore("templates");
+
   const moveTopTop = (name: string) =>
     get()
       .then((tpls) => {
@@ -111,5 +113,5 @@ export const template = () => {
       })
       .then(setInStore);
 
-  return { get, set, remove, moveTopTop };
+  return { get, set, remove, removeAll, moveTopTop };
 };

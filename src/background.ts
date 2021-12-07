@@ -115,15 +115,13 @@ chrome.runtime.onMessage.addListener(function (msg) {
   if (msg.type === "connection_stored") {
     configureListener();
   } else if (msg.type === "logout") {
-    connection()
-      .remove()
-      .then(() => {
-        chrome.browserAction.setPopup({ popup: "connection.html" });
-        const view = chrome.extension
-          .getViews()
-          .filter((v) => v.location.href.includes("/screenshot.html"))
-          .forEach((v) => v.close());
-      });
+    Promise.all([connection().remove(), template().removeAll()]).then(() => {
+      chrome.browserAction.setPopup({ popup: "connection.html" });
+      chrome.extension
+        .getViews()
+        .filter((v) => v.location.href.includes("/screenshot.html"))
+        .forEach((v) => v.close());
+    });
   } else if (msg.name && msg.url) {
     connection()
       .get()
