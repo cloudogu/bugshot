@@ -15,15 +15,26 @@
     "js": ["content.js"]
   }],
   "browser_action": {
-    "default_icon": "camera.png",
+    "default_icon": {
+      "16": "images/bugshot-icon-16x16.png",
+      "24": "images/bugshot-icon-24x24.png",
+      "32": "images/bugshot-icon-32x32.png",
+      "64": "images/bugshot-icon-64x64.png",
+      "128": "images/bugshot-icon-128x128.png",
+      "256": "images/bugshot-icon-256x256.png",
+      "512": "images/bugshot-icon-512x512.png"
+    },
     "default_title": "Take a screen shot!",
     "default_popup": "connection.html"
   },
   "icons": {
-    "16": "images/camera16.png",
-    "32": "images/camera32.png",
-    "64": "images/camera64.png",
-    "128": "images/camera128.png"
+    "16": "images/bugshot-icon-16x16.png",
+    "24": "images/bugshot-icon-24x24.png",
+    "32": "images/bugshot-icon-32x32.png",
+    "64": "images/bugshot-icon-64x64.png",
+    "128": "images/bugshot-icon-128x128.png",
+    "256": "images/bugshot-icon-256x256.png",
+    "512": "images/bugshot-icon-512x512.png"
   },
   "permissions": [
     "activeTab",
