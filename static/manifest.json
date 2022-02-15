@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "BugShot",
-  "version": "1.0",
-  "description": "Building a screenshot taking extension",
+  "version": "0.1.0",
+  "description": "Capture visual bugs and report it to redmine",
   "background": {
     "scripts": ["background.js"],
     "persistent": false
@@ -24,7 +24,7 @@
       "256": "images/bugshot-icon-256x256.png",
       "512": "images/bugshot-icon-512x512.png"
     },
-    "default_title": "Take a screen shot!",
+    "default_title": "Report a visual bug",
     "default_popup": "connection.html"
   },
   "icons": {
