@@ -3,7 +3,6 @@ import ErrorNotification from "../shared/ErrorNotification";
 import useConnection from "./useConnection";
 import { BugShot, Screenshot } from "../api/types";
 import CreateIssue from "./CreateIssue";
-import "twin.macro";
 import { TemplateEntry } from "./useTemplates";
 
 type Props = {

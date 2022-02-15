@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import "twin.macro";
 
 type Props = {
   error?: Error | string;
@@ -14,7 +13,7 @@ const ErrorNotification: FC<Props> = ({ error }) => {
     return null;
   }
   return (
-    <p tw="text-red-700">
+    <p className="text-red-700">
       <strong>Error</strong> {isError(error) ? error.message : error}
     </p>
   );

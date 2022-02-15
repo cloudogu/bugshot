@@ -1,17 +1,16 @@
-import React, { FC } from "react"
+import React, { FC } from "react";
 import Title from "./Title";
 
-
-const GettingStarted:FC = ({children}) => (
-  <div tw="p-4">
+const GettingStarted: FC = ({ children }) => (
+  <div className="p-4">
     <Title>Getting started</Title>
-    <p tw="mt-4">
+    <p className="mt-4">
       Before you can create a redmine issue, we have to create a template. To
       create an template, choose an issue from your redmine instance as
       reference. Then click <strong>BugShot</strong> from the issue action menu.
     </p>
     <img
-      tw="my-4 border-2 shadow-lg"
+      className="my-4 border-2 shadow-lg"
       src="./images/create-template-1.png"
       alt="Create template"
     />
@@ -20,7 +19,7 @@ const GettingStarted:FC = ({children}) => (
       choose a name for the new template.
     </p>
     <img
-      tw="my-4 border-2 shadow-lg"
+      className="my-4 border-2 shadow-lg"
       src="./images/create-template-2.png"
       alt="Name template"
     />

@@ -3,7 +3,6 @@ import { TemplateEntry } from "./useTemplates";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Button from "../shared/Button";
-import "twin.macro";
 
 type LineProps = {
   templates: TemplateEntry[];
@@ -11,10 +10,10 @@ type LineProps = {
 };
 
 const TemplateLine: FC<LineProps> = ({ templates, template }) => (
-  <li tw="w-full p-2 text-sm">
+  <li className="w-full p-2 text-sm">
     <span>{template.name}</span>
     {templates.length > 1 ? (
-      <button tw="float-right w-4 h-4" onClick={template.remove}>
+      <button className="float-right w-4 h-4" onClick={template.remove}>
         <FontAwesomeIcon icon={faTrash} />
       </button>
     ) : null}
@@ -35,8 +34,8 @@ const Settings: FC<EditorProps> = ({ templates }) => {
   };
   return (
     <>
-      <h2 tw="text-xl font-bold py-4 mt-2">Templates</h2>
-      <ul tw="w-full">
+      <h2 className="text-xl font-bold py-4 mt-2">Templates</h2>
+      <ul className="w-full">
         {templates.map((template) => (
           <TemplateLine
             key={template.name}
@@ -45,8 +44,8 @@ const Settings: FC<EditorProps> = ({ templates }) => {
           />
         ))}
       </ul>
-      <h2 tw="text-xl font-bold py-4">Logout</h2>
-      <Button tw="w-full" onClick={logout} isLoading={isLoading}>
+      <h2 className="text-xl font-bold py-4">Logout</h2>
+      <Button className="w-full" onClick={logout} isLoading={isLoading}>
         Logout
       </Button>
     </>

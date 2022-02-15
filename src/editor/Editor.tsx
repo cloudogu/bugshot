@@ -3,7 +3,6 @@ import ImageEditor from "./ImageEditor";
 import useBugShot from "./useBugShot";
 import { Screenshot } from "../api/types";
 import SideMenu from "./SideMenu";
-import "twin.macro";
 
 const createScreenshot = (stageRef: MutableRefObject<any>): Screenshot => {
   return {
@@ -24,8 +23,8 @@ const Editor: FC = () => {
   const screenshot = createScreenshot(stageRef);
 
   return (
-    <div tw="flex flex-row flex-wrap h-screen">
-      <main tw="w-3/4 h-full shadow-md border-2">
+    <div className="flex flex-row flex-wrap h-screen">
+      <main className="w-3/4 h-full shadow-md border-2">
         <ImageEditor stageRef={stageRef} image={bugshot?.screenshotUrl} />
       </main>
       <SideMenu screenshot={screenshot} bugshot={bugshot} />

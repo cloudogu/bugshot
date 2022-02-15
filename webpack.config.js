@@ -12,7 +12,7 @@ module.exports = {
     content: "./src/content.ts",
     screenshot: "./src/screenshot.ts",
     editor: "./src/editor.tsx",
-    connection: "./src/connection.tsx"
+    connection: "./src/connection.tsx",
   },
   module: {
     rules: [
@@ -25,7 +25,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   },

@@ -1,7 +1,6 @@
 import React, { FC, MutableRefObject } from "react";
 import ReactImgEditor from "@cloudogu/react-img-editor";
 import "@cloudogu/react-img-editor/lib/index.css";
-import "twin.macro";
 import useDimension from "./useDimension";
 
 type Props = {
@@ -21,7 +20,7 @@ const ImageEditor: FC<Props> = ({ stageRef, image }) => {
   }
 
   return (
-    <div tw="overflow-scroll h-full" ref={ref}>
+    <div className="overflow-scroll h-full" ref={ref}>
       <div style={{ width, height }}>
         <ReactImgEditor
           src={image}

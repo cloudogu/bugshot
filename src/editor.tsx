@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import GlobalStyles from "./styles/GlobalStyles";
 import Editor from "./editor/Editor";
+import "./styles/tailwind.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyles />
     <Editor />
   </React.StrictMode>,
   document.getElementById("root")

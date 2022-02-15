@@ -3,7 +3,7 @@
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "node",
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "baseUrl": "./src",
     "noEmit": true,
     "strict": true,
@@ -14,8 +14,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
-    "jsxImportSource": "@emotion/react" // Add the css prop
+    "esModuleInterop": true
   },
   "include": ["src"]
 }

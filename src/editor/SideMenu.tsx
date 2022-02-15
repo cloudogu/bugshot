@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Container: FC = ({ children }) => (
-  <aside tw="w-1/4 h-full">{children}</aside>
+  <aside className="w-1/4 h-full">{children}</aside>
 );
 
 const SideMenu: FC<Props> = ({ screenshot, bugshot }) => {
