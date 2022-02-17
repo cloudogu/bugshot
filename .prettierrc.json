@@ -1,0 +1,10 @@
+{
+  "printWidth": 120,
+  "tabWidth": 2,
+  "importOrder": ["^react$", "^react-.*$", "<THIRD_PARTY_MODULES>", "^[./]"],
+  "arrowParens": "always",
+  "semi": true,
+  "singleQuote": false,
+  "jsxSingleQuote": false,
+  "trailingComma": "es5"
+}
