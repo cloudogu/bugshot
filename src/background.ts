@@ -1,14 +1,14 @@
 import { converIssueToTemplate } from "./api/convert";
 import { connection, template } from "./api/store";
-import { BugShot } from "./api/types";
 import createRedmineApi from "./api/redmine";
+import { BugShotMessage } from "api/types";
 
 // To make sure we can uniquely identify each screenshot tab, add an id as a
 // query param to the url that displays the screenshot.
 let id = 100;
 const createBugShot = (capturedTab: chrome.tabs.Tab) => {
   chrome.tabs.captureVisibleTab((screenshotUrl) => {
-    const viewTabUrl = chrome.extension.getURL("screenshot.html?id=" + id++);
+    const viewTabUrl = chrome.runtime.getURL("screenshot.html?id=" + id++);
     let targetId: number | undefined = undefined;
 
     chrome.tabs.onUpdated.addListener(function listener(tabId, changedProps) {
@@ -23,35 +23,24 @@ const createBugShot = (capturedTab: chrome.tabs.Tab) => {
       // when onUpdated events fire.
       chrome.tabs.onUpdated.removeListener(listener);
 
-      // We fetch all the views opened by our extension using getViews method and
-      // it returns an array of the JavaScript 'window' objects for each of the pages
-      // running inside the current extension. Inside the loop, we match each and
-      // every entry's URL to the unique URL we created at the top and if we get a match,
-      // we call a function on that view which will be called on the page that has been opened
-      // by our extension and we pass our image URL to the page so that it can display it to the user.
-      var views = chrome.extension.getViews();
-      for (var i = 0; i < views.length; i++) {
-        var view = views[i];
-        if (view.location.href == viewTabUrl) {
-          let resolution;
-          if (capturedTab.width && capturedTab.height) {
-            resolution = {
-              width: capturedTab.width,
-              height: capturedTab.height,
-            };
-          }
-
-          const bugshot: BugShot = {
-            url: capturedTab.url,
-            screenshotUrl,
-            resolution,
-          };
-
-          // @ts-ignore
-          view.onBugShot(bugshot);
-          break;
-        }
+      let resolution;
+      if (capturedTab.width && capturedTab.height) {
+        resolution = {
+          width: capturedTab.width,
+          height: capturedTab.height,
+        };
       }
+
+      const message: BugShotMessage = {
+        type: "BugShot",
+        bugShot: {
+          url: capturedTab.url,
+          screenshotUrl,
+          resolution: resolution,
+        },
+      };
+
+      chrome.runtime.sendMessage(message);
     });
 
     //We open the tab URL by using the chrome tabs create method and passing it the
@@ -63,7 +52,7 @@ const createBugShot = (capturedTab: chrome.tabs.Tab) => {
   });
 };
 
-const browserActionListener = () => {
+const actionListener = () => {
   chrome.tabs.query(
     { active: true, windowId: chrome.windows.WINDOW_ID_CURRENT },
     (tabs) => {
@@ -75,9 +64,9 @@ const browserActionListener = () => {
 };
 
 const configureListener = () => {
-  chrome.browserAction.setPopup({ popup: "" });
-  if (!chrome.browserAction.onClicked.hasListener(browserActionListener)) {
-    chrome.browserAction.onClicked.addListener(browserActionListener);
+  chrome.action.setPopup({ popup: "" });
+  if (!chrome.action.onClicked.hasListener(actionListener)) {
+    chrome.action.onClicked.addListener(actionListener);
   }
 };
 
@@ -103,7 +92,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, _, tab) {
   connection()
     .get()
     .then((c) => {
-      if (tab.url && tab.url.startsWith(`${c.url}/issues`)) {
+      if (tab.url && c?.url && tab.url.startsWith(`${c.url}/issues`)) {
         chrome.tabs.sendMessage(tabId, {
           type: "bugshot_url",
         });
@@ -116,11 +105,7 @@ chrome.runtime.onMessage.addListener(function (msg) {
     configureListener();
   } else if (msg.type === "logout") {
     Promise.all([connection().remove(), template().removeAll()]).then(() => {
-      chrome.browserAction.setPopup({ popup: "connection.html" });
-      chrome.extension
-        .getViews()
-        .filter((v) => v.location.href.includes("/screenshot.html"))
-        .forEach((v) => v.close());
+      chrome.action.setPopup({ popup: "connection.html" });
     });
   } else if (msg.name && msg.url) {
     connection()

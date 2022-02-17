@@ -1,20 +1,18 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "BugShot",
   "version": "0.1.0",
   "description": "Capture visual bugs and report it to redmine",
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js"
   },
-  "content_scripts": [{
-    "matches": [
-      "http://*/*",
-      "https://*/*"
-    ],
-    "js": ["content.js"]
-  }],
-  "browser_action": {
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
     "default_icon": {
       "16": "images/bugshot-icon-16x16.png",
       "24": "images/bugshot-icon-24x24.png",
@@ -36,13 +34,8 @@
     "256": "images/bugshot-icon-256x256.png",
     "512": "images/bugshot-icon-512x512.png"
   },
-  "permissions": [
-    "activeTab",
-    "storage",
-    "notifications",
-    "http://*/",
-    "https://*/"
-  ],
+  "permissions": ["activeTab", "storage", "notifications"],
+  "host_permissions": ["http://*/", "https://*/"],
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {

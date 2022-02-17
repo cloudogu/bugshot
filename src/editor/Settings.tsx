@@ -31,6 +31,11 @@ const Settings: FC<EditorProps> = ({ templates }) => {
     chrome.runtime.sendMessage({
       type: "logout",
     });
+    chrome.tabs.getCurrent((tab) => {
+      if (tab?.id) {
+        chrome.tabs.remove(tab.id);
+      }
+    });
   };
   return (
     <>

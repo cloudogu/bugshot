@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
-import { BugShot } from "api/types";
+import { BugShot, BugShotMessage } from "api/types";
+
+const isBugShotMessage = (message: any): message is BugShotMessage => {
+  return message.type === "BugShot";
+};
 
 const useBugShot = () => {
   const [bugshot, setBugShot] = useState<BugShot>();
 
   useEffect(() => {
-    const listener = (event: Event) => {
-      const url = (event as CustomEvent<BugShot>).detail;
-      setBugShot(url);
+    const listener = (msg: any) => {
+      if (isBugShotMessage(msg)) {
+        setBugShot(msg.bugShot);
+      }
     };
-    window.addEventListener("bugshot", listener);
+
+    chrome.runtime.onMessage.addListener(listener);
     return () => {
-      window.removeEventListener("bugshot", listener);
+      chrome.runtime.onMessage.removeListener(listener);
     };
   }, []);
 

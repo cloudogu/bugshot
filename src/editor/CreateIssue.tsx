@@ -79,7 +79,7 @@ const CreateIssue: FC<Props> = ({
     // wait for the notification popsup
     setTimeout(() => {
       chrome.tabs.getCurrent((tab) => {
-        if (tab && tab.id) {
+        if (tab?.id) {
           // then close the screenshot tab
           chrome.tabs.remove(tab.id);
         }

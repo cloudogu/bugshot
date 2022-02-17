@@ -10,7 +10,6 @@ module.exports = {
   entry: {
     background: "./src/background.ts",
     content: "./src/content.ts",
-    screenshot: "./src/screenshot.ts",
     editor: "./src/editor.tsx",
     connection: "./src/connection.tsx",
   },

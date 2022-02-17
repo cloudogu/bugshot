@@ -4,8 +4,13 @@ export type BugShot = {
   resolution?: {
     width: number;
     height: number;
-  }
-}
+  };
+};
+
+export type BugShotMessage = {
+  type: "BugShot";
+  bugShot: BugShot;
+};
 
 export type Connection = {
   url: string;
@@ -49,7 +54,7 @@ export type Template = {
 export type NamedTemplate = {
   name: string;
   template: Template;
-}
+};
 
 export type Templates = NamedTemplate[];
 
