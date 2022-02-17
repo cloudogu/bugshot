@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BugShot",
-  "version": "0.1.0",
+  "version": "<< version >>",
   "description": "Capture visual bugs and report it to redmine",
   "background": {
     "service_worker": "background.js"
