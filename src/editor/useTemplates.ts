@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Template } from "../api/types";
 import { template } from "../api/store";
+import { Template } from "../api/types";
 
 export type TemplateEntry = {
   name: string;

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import ErrorNotification from "../shared/ErrorNotification";
-import useConnection from "./useConnection";
 import { BugShot, Screenshot } from "../api/types";
+import ErrorNotification from "../shared/ErrorNotification";
 import CreateIssue from "./CreateIssue";
+import useConnection from "./useConnection";
 import { TemplateEntry } from "./useTemplates";
 
 type Props = {
@@ -22,14 +22,7 @@ const IssueEditor: FC<Props> = ({ bugshot, screenshot, templates }) => {
     return <ErrorNotification error="Connection not configured" />;
   }
 
-  return (
-    <CreateIssue
-      connection={connection}
-      bugshot={bugshot}
-      screenshot={screenshot}
-      templates={templates}
-    />
-  );
+  return <CreateIssue connection={connection} bugshot={bugshot} screenshot={screenshot} templates={templates} />;
 };
 
 export default IssueEditor;

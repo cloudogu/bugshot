@@ -1,7 +1,7 @@
-import { converIssueToTemplate } from "./api/convert";
-import { connection, template } from "./api/store";
-import createRedmineApi from "./api/redmine";
 import { BugShotMessage } from "api/types";
+import { converIssueToTemplate } from "./api/convert";
+import createRedmineApi from "./api/redmine";
+import { connection, template } from "./api/store";
 
 // To make sure we can uniquely identify each screenshot tab, add an id as a
 // query param to the url that displays the screenshot.
@@ -53,14 +53,11 @@ const createBugShot = (capturedTab: chrome.tabs.Tab) => {
 };
 
 const actionListener = () => {
-  chrome.tabs.query(
-    { active: true, windowId: chrome.windows.WINDOW_ID_CURRENT },
-    (tabs) => {
-      if (tabs && tabs.length === 1) {
-        createBugShot(tabs[0]);
-      }
+  chrome.tabs.query({ active: true, windowId: chrome.windows.WINDOW_ID_CURRENT }, (tabs) => {
+    if (tabs && tabs.length === 1) {
+      createBugShot(tabs[0]);
     }
-  );
+  });
 };
 
 const configureListener = () => {
@@ -78,14 +75,12 @@ connection()
     }
   });
 
-chrome.notifications.onButtonClicked.addListener(
-  (notifId: string, btnIdx: number) => {
-    if (notifId.startsWith("bugshot-") && btnIdx === 0) {
-      const url = notifId.replace("bugshot-", "");
-      chrome.tabs.create({ url: url });
-    }
+chrome.notifications.onButtonClicked.addListener((notifId: string, btnIdx: number) => {
+  if (notifId.startsWith("bugshot-") && btnIdx === 0) {
+    const url = notifId.replace("bugshot-", "");
+    chrome.tabs.create({ url: url });
   }
-);
+});
 
 // send message to content script, if the new tab url is the confiured redmine url
 chrome.tabs.onUpdated.addListener(function (tabId, _, tab) {

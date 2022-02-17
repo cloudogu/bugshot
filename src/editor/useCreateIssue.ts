@@ -20,11 +20,7 @@ const useCreateIssue = () => {
   const [error, setError] = useState<Error>();
   const api = useRedmineApi();
 
-  const create = (
-    issue: Issue,
-    bugshot: BugShot,
-    callback: (issue: CreatedIssue) => void
-  ) => {
+  const create = (issue: Issue, bugshot: BugShot, callback: (issue: CreatedIssue) => void) => {
     setIsLoading(true);
 
     if (!api) {

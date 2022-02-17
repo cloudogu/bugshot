@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import GettingStarted from "../shared/GettingStarted";
 import Button from "../shared/Button";
+import GettingStarted from "../shared/GettingStarted";
 
 type Props = {
   reload: () => void;

@@ -1,23 +1,33 @@
-import { Connection, Enumeration, CreateIssueRequest, Project, Screenshot, UploadResponse, Issue, InitialConnection, Me } from "./types";
+import {
+  Connection,
+  Enumeration,
+  CreateIssueRequest,
+  Project,
+  Screenshot,
+  UploadResponse,
+  Issue,
+  InitialConnection,
+  Me,
+} from "./types";
 
 type RemdineConnection = Connection | InitialConnection;
 
 const isInitialConnection = (connection: RemdineConnection): connection is InitialConnection => {
   return (connection as InitialConnection).username !== undefined;
-}
+};
 
 const createRedmineApi = (connection: RemdineConnection) => {
   let headers: HeadersInit;
   if (isInitialConnection(connection)) {
     headers = {
-      Authorization: 'Basic ' + btoa(connection.username + ":" + connection.password)
-    }
+      Authorization: "Basic " + btoa(connection.username + ":" + connection.password),
+    };
   } else {
     headers = {
       "X-Redmine-API-Key": connection.apiKey,
-    }
+    };
   }
-  
+
   const get = (uri: string) => {
     let request = uri;
     if (!uri.includes("://")) {
@@ -33,7 +43,7 @@ const createRedmineApi = (connection: RemdineConnection) => {
         throw new Error("request failed");
       }
       return response.json();
-    })
+    });
   };
 
   const upload = (screenshot: Screenshot, filename: string) =>
@@ -90,18 +100,14 @@ const createRedmineApi = (connection: RemdineConnection) => {
       }));
 
   return {
-    me: (): Promise<Me> => get("/my/account.json").then(json => json.user),
+    me: (): Promise<Me> => get("/my/account.json").then((json) => json.user),
     projects: (): Promise<Project[]> =>
-      get("/projects.json?include=trackers,issue_categories").then(
-        (json) => json.projects
-      ),
+      get("/projects.json?include=trackers,issue_categories").then((json) => json.projects),
     priorities: (): Promise<Enumeration[]> =>
-      get("/enumerations/issue_priorities.json").then(
-        (json) => json.issue_priorities
-      ),
+      get("/enumerations/issue_priorities.json").then((json) => json.issue_priorities),
     upload,
     create,
-    issue: (url: string): Promise<Issue> => get(url).then((json) => json.issue)
+    issue: (url: string): Promise<Issue> => get(url).then((json) => json.issue),
   };
 };
 

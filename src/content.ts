@@ -28,10 +28,7 @@ function createBugShotLink(menu: Element) {
     // close menu
     menu.classList.remove("expanded");
 
-    const name = prompt(
-      "Please enter the name for the BugShot Template:",
-      "Default"
-    );
+    const name = prompt("Please enter the name for the BugShot Template:", "Default");
 
     // send message with link and insert name to background script
     chrome.runtime.sendMessage({

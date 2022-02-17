@@ -1,5 +1,5 @@
-import { Connection, Template, Templates } from "./types";
 import { AES, enc } from "crypto-js";
+import { Connection, Template, Templates } from "./types";
 
 type StoredConnection = Connection & {
   keySuffix: string;
@@ -7,8 +7,7 @@ type StoredConnection = Connection & {
 
 const keyPrefix = "LIVjvMRo";
 
-const characters =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 const random = (length: number) => {
   var result = "";
@@ -31,17 +30,12 @@ const getFromStore = (key: string) =>
   });
 
 const setInStore = (items: { [key: string]: any }) =>
-  new Promise((resolve) =>
-    chrome.storage.sync.set(items, () => resolve(undefined))
-  );
+  new Promise((resolve) => chrome.storage.sync.set(items, () => resolve(undefined)));
 
 const removeFromStore = (key: string) =>
-  new Promise((resolve) =>
-    chrome.storage.sync.remove(key, () => resolve(undefined))
-  );
+  new Promise((resolve) => chrome.storage.sync.remove(key, () => resolve(undefined)));
 
-const getStoredConnection = () =>
-  getFromStore("connection") as Promise<StoredConnection>;
+const getStoredConnection = () => getFromStore("connection") as Promise<StoredConnection>;
 
 export const connection = () => {
   const get = () =>
@@ -51,10 +45,7 @@ export const connection = () => {
       }
       return {
         url: storedConnection.url,
-        apiKey: AES.decrypt(
-          storedConnection.apiKey,
-          keyPrefix + storedConnection.keySuffix
-        ).toString(enc.Utf8),
+        apiKey: AES.decrypt(storedConnection.apiKey, keyPrefix + storedConnection.keySuffix).toString(enc.Utf8),
       };
     }) as Promise<Connection>;
 

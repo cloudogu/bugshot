@@ -1,20 +1,18 @@
 import React, { FC } from "react";
+import { BugShot, Screenshot } from "../api/types";
+import Spinner from "../shared/Spinner";
 import IssueEditor from "./IssueEditor";
 import Settings from "./Settings";
-import { BugShot, Screenshot } from "../api/types";
 import Tabs, { Tab } from "./Tabs";
-import useTemplates from "./useTemplates";
-import Spinner from "../shared/Spinner";
 import TemplateTutorial from "./TemplateTutorial";
+import useTemplates from "./useTemplates";
 
 type Props = {
   screenshot: Screenshot;
   bugshot?: BugShot;
 };
 
-const Container: FC = ({ children }) => (
-  <aside className="w-1/4 h-full">{children}</aside>
-);
+const Container: FC = ({ children }) => <aside className="w-1/4 h-full">{children}</aside>;
 
 const SideMenu: FC<Props> = ({ screenshot, bugshot }) => {
   const { entries, isLoading, reload } = useTemplates();
@@ -39,11 +37,7 @@ const SideMenu: FC<Props> = ({ screenshot, bugshot }) => {
     <Container>
       <Tabs>
         <Tab title="Create Issue">
-          <IssueEditor
-            screenshot={screenshot}
-            bugshot={bugshot}
-            templates={entries}
-          />
+          <IssueEditor screenshot={screenshot} bugshot={bugshot} templates={entries} />
         </Tab>
         <Tab title="Settings">
           <Settings templates={entries} />

@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
-import { TemplateEntry } from "./useTemplates";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../shared/Button";
+import { TemplateEntry } from "./useTemplates";
 
 type LineProps = {
   templates: TemplateEntry[];
@@ -42,11 +42,7 @@ const Settings: FC<EditorProps> = ({ templates }) => {
       <h2 className="text-xl font-bold py-4 mt-2">Templates</h2>
       <ul className="w-full">
         {templates.map((template) => (
-          <TemplateLine
-            key={template.name}
-            templates={templates}
-            template={template}
-          />
+          <TemplateLine key={template.name} templates={templates} template={template} />
         ))}
       </ul>
       <h2 className="text-xl font-bold py-4">Logout</h2>

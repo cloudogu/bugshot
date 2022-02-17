@@ -1,8 +1,8 @@
 import React, { FC, MutableRefObject, useRef } from "react";
-import ImageEditor from "./ImageEditor";
-import useBugShot from "./useBugShot";
 import { Screenshot } from "../api/types";
+import ImageEditor from "./ImageEditor";
 import SideMenu from "./SideMenu";
+import useBugShot from "./useBugShot";
 
 const createScreenshot = (stageRef: MutableRefObject<any>): Screenshot => {
   return {

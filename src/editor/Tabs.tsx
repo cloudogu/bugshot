@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import React, { FC, ReactElement, ReactNode, useState } from "react";
+import classNames from "classnames";
 import Title from "../shared/Title";
 
 type TabProps = {
@@ -19,9 +19,7 @@ type TabsProps = {
 
 const Tabs: FC<TabsProps> = ({ children }) => {
   const [active, setActive] = useState(0);
-  const tabs = React.Children.toArray(children) as Array<
-    ReactElement<TabProps>
-  >;
+  const tabs = React.Children.toArray(children) as Array<ReactElement<TabProps>>;
 
   return (
     <div>

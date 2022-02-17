@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
-import useCreateIssue, { CreatedIssue } from "./useCreateIssue";
 import { Screenshot, BugShot } from "../api/types";
-import InputField from "../shared/InputField";
 import Button from "../shared/Button";
-import { Connection } from "./useConnection";
-import Textarea from "../shared/Textarea";
 import ErrorNotification from "../shared/ErrorNotification";
 import FormContainer from "../shared/FormContainer";
+import InputField from "../shared/InputField";
 import Select from "../shared/Select";
+import Textarea from "../shared/Textarea";
+import { Connection } from "./useConnection";
+import useCreateIssue, { CreatedIssue } from "./useCreateIssue";
 import { TemplateEntry } from "./useTemplates";
 
 type Props = {
@@ -24,12 +24,7 @@ type CreateIssueForm = {
   template: string;
 };
 
-const CreateIssue: FC<Props> = ({
-  connection,
-  screenshot,
-  bugshot,
-  templates,
-}) => {
+const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) => {
   const { create, isLoading, error } = useCreateIssue();
   const {
     register,
@@ -60,21 +55,18 @@ const CreateIssue: FC<Props> = ({
   const close = (issue: CreatedIssue, template: TemplateEntry) => {
     template.moveToTop();
 
-    chrome.notifications.create(
-      `bugshot-${connection.url}/issues/${issue.id}`,
-      {
-        type: "basic",
-        iconUrl: "camera.png",
-        title: `Created issue ${issue.id}`,
-        message: `Bugshot create a new issue with the id ${issue.id}`,
-        buttons: [
-          {
-            title: "Open",
-            iconUrl: "camera.png",
-          },
-        ],
-      }
-    );
+    chrome.notifications.create(`bugshot-${connection.url}/issues/${issue.id}`, {
+      type: "basic",
+      iconUrl: "camera.png",
+      title: `Created issue ${issue.id}`,
+      message: `Bugshot create a new issue with the id ${issue.id}`,
+      buttons: [
+        {
+          title: "Open",
+          iconUrl: "camera.png",
+        },
+      ],
+    });
 
     // wait for the notification popsup
     setTimeout(() => {

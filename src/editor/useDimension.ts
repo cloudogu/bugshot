@@ -9,7 +9,7 @@ const useDimension = <T extends HTMLElement>() => {
       setHeight(node.clientHeight);
     }
   }, []);
-  
+
   return { ref, width, height };
 };
 

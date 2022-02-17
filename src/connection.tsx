@@ -1,6 +1,6 @@
-import CreateConnection from "./connection/CreateConnection";
 import React from "react";
 import ReactDOM from "react-dom";
+import CreateConnection from "./connection/CreateConnection";
 import "./styles/tailwind.css";
 
 ReactDOM.render(

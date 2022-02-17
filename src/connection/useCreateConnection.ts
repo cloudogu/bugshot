@@ -1,7 +1,7 @@
 import { useState } from "react";
+import createRedmineApi from "../api/redmine";
 import { connection as store } from "../api/store";
 import { InitialConnection } from "../api/types";
-import createRedmineApi from "../api/redmine";
 
 export type ApiKeyRequest = {
   url: string;
@@ -22,7 +22,7 @@ const useCreateConnection = () => {
 
     const api = createRedmineApi({
       ...connection,
-      url
+      url,
     });
     api
       .me()
