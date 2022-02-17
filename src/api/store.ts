@@ -1,21 +1,8 @@
-import { AES, enc } from "crypto-js";
+import { decrypt, encrypt } from "./crypto";
 import { Connection, Template, Templates } from "./types";
 
 type StoredConnection = Connection & {
   keySuffix: string;
-};
-
-const keyPrefix = "LIVjvMRo";
-
-const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-const random = (length: number) => {
-  let result = "";
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i += 1) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
 };
 
 const getFromStore = (key: string) =>
@@ -47,16 +34,16 @@ export const connection = () => {
       }
       return {
         url: storedConnection.url,
-        apiKey: AES.decrypt(storedConnection.apiKey, keyPrefix + storedConnection.keySuffix).toString(enc.Utf8),
+        apiKey: decrypt({ encrypted: storedConnection.apiKey, keySuffix: storedConnection.keySuffix }),
       };
     }) as Promise<Connection>;
 
   const set = (conn: Connection) => {
-    const keySuffix = random(8);
+    const encrypted = encrypt(conn.apiKey);
     const storedConnection: StoredConnection = {
       ...conn,
-      apiKey: AES.encrypt(conn.apiKey, keyPrefix + keySuffix).toString(),
-      keySuffix,
+      apiKey: encrypted.encrypted,
+      keySuffix: encrypted.keySuffix,
     };
     return setInStore({ connection: storedConnection });
   };
