@@ -5,10 +5,11 @@
   "author": "SCM Team <scm-team@cloudogu.com>",
   "license": "MIT",
   "scripts": {
-    "build": "NODE_ENV=production webpack",
-    "develop": "NODE_ENV=development webpack --watch",
+    "build": "cross-env NODE_ENV=production webpack",
+    "develop": "cross-env NODE_ENV=development webpack --watch",
     "format": "prettier --write src static",
-    "lint": "eslint src/**/*.{ts,tsx} static/**/*.html"
+    "lint": "eslint src/**/*.{ts,tsx} static/**/*.html",
+    "analyze-bundles": "cross-env NODE_ENV=production ANALYZE_BUNDLES=true webpack"
   },
   "dependencies": {
     "@cloudogu/react-img-editor": "^0.3.0",
@@ -39,6 +40,7 @@
     "babel-plugin-macros": "^3.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^9.0.1",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "eslint": "^8.9.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -58,6 +60,7 @@
     "tailwindcss": "^3.0.22",
     "typescript": "^4.5.5",
     "webpack": "^5.62.1",
+    "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.1",
     "zip-webpack-plugin": "^4.0.1"
   }

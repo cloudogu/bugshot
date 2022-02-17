@@ -9,14 +9,20 @@ const isDevelopment = process.env.NODE_ENV === "development";
 const plugins = [
   new CleanWebpackPlugin(),
   new CopyPlugin({
-    patterns: [{ from: "static", to: ".", transform: (content, absoluteFrom) => {
-      if (absoluteFrom.endsWith("manifest.json")) {
-        const manifest = JSON.parse(content);
-        manifest.version = version;
-        return JSON.stringify(manifest, null, 2);
-      }
-      return content;
-    } }],
+    patterns: [
+      {
+        from: "static",
+        to: ".",
+        transform: (content, absoluteFrom) => {
+          if (absoluteFrom.endsWith("manifest.json")) {
+            const manifest = JSON.parse(content);
+            manifest.version = version;
+            return JSON.stringify(manifest, null, 2);
+          }
+          return content;
+        },
+      },
+    ],
   }),
 ];
 
@@ -27,6 +33,11 @@ if (!isDevelopment) {
       path: path.join(__dirname, "dist"),
     })
   );
+}
+
+if (process.env.ANALYZE_BUNDLES === "true") {
+  const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+  plugins.push(new BundleAnalyzerPlugin());
 }
 
 module.exports = {
