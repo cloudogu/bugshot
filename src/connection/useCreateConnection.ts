@@ -15,7 +15,7 @@ const useCreateConnection = () => {
   const create = (connection: InitialConnection, callback: () => void) => {
     setIsLoading(true);
 
-    let url = connection.url;
+    let { url } = connection;
     if (url.endsWith("/")) {
       url = url.substring(0, url.length - 1);
     }

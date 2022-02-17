@@ -14,7 +14,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, Props>(({ label, error, .
       placeholder={label}
       ref={ref}
       {...props}
-    ></textarea>
+    />
     <FieldError error={error} />
   </Label>
 ));

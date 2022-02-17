@@ -4,9 +4,7 @@ type Props = {
   error?: Error | string;
 };
 
-const isError = (error: Error | string): error is Error => {
-  return (error as Error).message !== undefined;
-};
+const isError = (error: Error | string): error is Error => (error as Error).message !== undefined;
 
 const ErrorNotification: FC<Props> = ({ error }) => {
   if (!error) {

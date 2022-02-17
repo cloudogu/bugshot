@@ -12,15 +12,14 @@ import {
 
 type RemdineConnection = Connection | InitialConnection;
 
-const isInitialConnection = (connection: RemdineConnection): connection is InitialConnection => {
-  return (connection as InitialConnection).username !== undefined;
-};
+const isInitialConnection = (connection: RemdineConnection): connection is InitialConnection =>
+  (connection as InitialConnection).username !== undefined;
 
 const createRedmineApi = (connection: RemdineConnection) => {
   let headers: HeadersInit;
   if (isInitialConnection(connection)) {
     headers = {
-      Authorization: "Basic " + btoa(connection.username + ":" + connection.password),
+      Authorization: `Basic ${btoa(`${connection.username}:${connection.password}`)}`,
     };
   } else {
     headers = {
@@ -35,7 +34,7 @@ const createRedmineApi = (connection: RemdineConnection) => {
     }
 
     return fetch(request, {
-      headers: headers,
+      headers,
       // do not prompt for basic auth if key authentication failed
       credentials: "omit",
     }).then((response) => {

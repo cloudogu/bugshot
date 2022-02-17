@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Screenshot, BugShot } from "../api/types";
-import { Template } from "../api/types";
+import { Screenshot, BugShot, Template } from "../api/types";
 import useRedmineApi from "./useRedmineApi";
 
 export type Issue = {
@@ -27,7 +26,7 @@ const useCreateIssue = () => {
       throw new Error("api is not defined");
     }
 
-    let description = issue.description;
+    let { description } = issue;
     description += "\n\n---\n";
     if (bugshot.url) {
       description += `**URL:** ${bugshot.url}\n`;
@@ -43,8 +42,8 @@ const useCreateIssue = () => {
         api.create({
           ...issue.template,
           subject: issue.subject,
-          description: description,
-          uploads: [{ token: token, filename, content_type: "image/png" }],
+          description,
+          uploads: [{ token, filename, content_type: "image/png" }],
         })
       )
       .then(callback)

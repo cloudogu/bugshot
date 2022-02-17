@@ -45,7 +45,7 @@ const CreateConnection: FC = () => {
       <FormContainer>
         <InputField
           label="URL"
-          autoFocus={true}
+          autoFocus
           {...register("url", { required: true })}
           error={errors.url && "Url is required"}
         />

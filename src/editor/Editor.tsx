@@ -4,18 +4,16 @@ import ImageEditor from "./ImageEditor";
 import SideMenu from "./SideMenu";
 import useBugShot from "./useBugShot";
 
-const createScreenshot = (stageRef: MutableRefObject<any>): Screenshot => {
-  return {
-    toBlob: () => {
-      const canvas = stageRef.current.clearAndToCanvas({
-        pixelRatio: stageRef.current._pixelRatio,
-      }) as HTMLCanvasElement;
-      return new Promise<Blob | null>((resolve) => {
-        canvas.toBlob((blob) => resolve(blob));
-      });
-    },
-  };
-};
+const createScreenshot = (stageRef: MutableRefObject<any>): Screenshot => ({
+  toBlob: () => {
+    const canvas = stageRef.current.clearAndToCanvas({
+      pixelRatio: stageRef.current._pixelRatio,
+    }) as HTMLCanvasElement;
+    return new Promise<Blob | null>((resolve) => {
+      canvas.toBlob((blob) => resolve(blob));
+    });
+  },
+});
 
 const Editor: FC = () => {
   const bugshot = useBugShot();
