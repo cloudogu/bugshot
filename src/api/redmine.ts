@@ -73,7 +73,7 @@ const createRedmineApi = (connection: RemdineConnection) => {
         return response;
       })
       .then((response) => response.json())
-      .then((upload: UploadResponse) => upload.upload.token);
+      .then((response: UploadResponse) => response.upload.token);
 
   const create = (issue: CreateIssueRequest) =>
     fetch(`${connection.url}/issues.json`, {

@@ -32,26 +32,6 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) 
     formState: { errors },
   } = useForm<CreateIssueForm>();
 
-  const onSubmit = (issue: CreateIssueForm) => {
-    const template = templates.find((t) => t.name === issue.template);
-    if (!template) {
-      throw new Error(`could not find template ${issue.template}`);
-    }
-    if (!bugshot) {
-      throw new Error(`BugShot is undefined`);
-    }
-    create(
-      {
-        subject: issue.subject,
-        description: issue.description,
-        template: template.template,
-        screenshot,
-      },
-      bugshot,
-      (issue: CreatedIssue) => close(issue, template)
-    );
-  };
-
   const close = (issue: CreatedIssue, template: TemplateEntry) => {
     template.moveToTop();
 
@@ -77,6 +57,26 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) 
         }
       });
     }, 100);
+  };
+
+  const onSubmit = (issue: CreateIssueForm) => {
+    const template = templates.find((t) => t.name === issue.template);
+    if (!template) {
+      throw new Error(`could not find template ${issue.template}`);
+    }
+    if (!bugshot) {
+      throw new Error(`BugShot is undefined`);
+    }
+    create(
+      {
+        subject: issue.subject,
+        description: issue.description,
+        template: template.template,
+        screenshot,
+      },
+      bugshot,
+      (createdIssue: CreatedIssue) => close(createdIssue, template)
+    );
   };
 
   return (

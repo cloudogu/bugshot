@@ -11,7 +11,8 @@ type Props = {
 const ImageEditor: FC<Props> = ({ stageRef, image }) => {
   const { ref, width, height } = useDimension<HTMLDivElement>();
 
-  const setStage = (stage: any) => {
+  const setStage = (stage: unknown) => {
+    // eslint-disable-next-line no-param-reassign
     stageRef.current = stage;
   };
 

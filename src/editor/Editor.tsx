@@ -4,9 +4,11 @@ import ImageEditor from "./ImageEditor";
 import SideMenu from "./SideMenu";
 import useBugShot from "./useBugShot";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createScreenshot = (stageRef: MutableRefObject<any>): Screenshot => ({
   toBlob: () => {
     const canvas = stageRef.current.clearAndToCanvas({
+      // eslint-disable-next-line no-underscore-dangle
       pixelRatio: stageRef.current._pixelRatio,
     }) as HTMLCanvasElement;
     return new Promise<Blob | null>((resolve) => {

@@ -14,19 +14,19 @@ const useTemplates = () => {
   const [entries, setEntries] = useState<TemplateEntry[]>([]);
   const [counter, setCounter] = useState(0);
 
-  const increase = () => setCounter((c) => ++c);
+  const increase = () => setCounter((c) => c + 1);
 
   const remove = (name: string) => {
     template()
       .remove(name)
-      .then(() => setEntries((e) => [...e.filter((e) => e.name !== name)]));
-  };
-
-  const moveToTop = (name: string) => {
-    template().moveTopTop(name).then(increase);
+      .then(() => setEntries((e) => [...e.filter((entry) => entry.name !== name)]));
   };
 
   useEffect(() => {
+    const moveToTop = (name: string) => {
+      template().moveTopTop(name).then(increase);
+    };
+
     template()
       .get()
       .then((templates) => templates || [])
@@ -44,7 +44,7 @@ const useTemplates = () => {
   return {
     isLoading,
     entries,
-    reload: () => setCounter((c) => ++c),
+    reload: () => setCounter((c) => c + 1),
   };
 };
 

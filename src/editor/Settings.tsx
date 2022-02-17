@@ -13,7 +13,7 @@ const TemplateLine: FC<LineProps> = ({ templates, template }) => (
   <li className="w-full p-2 text-sm">
     <span>{template.name}</span>
     {templates.length > 1 ? (
-      <button className="float-right w-4 h-4" onClick={template.remove}>
+      <button type="button" className="float-right w-4 h-4" onClick={template.remove}>
         <FontAwesomeIcon icon={faTrash} />
       </button>
     ) : null}

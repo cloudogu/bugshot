@@ -12,7 +12,7 @@ const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567
 const random = (length: number) => {
   let result = "";
   const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < length; i += 1) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
@@ -29,10 +29,12 @@ const getFromStore = (key: string) =>
     });
   });
 
-const setInStore = (items: { [key: string]: any }) =>
+const setInStore = (items: { [key: string]: unknown }) =>
+  // eslint-disable-next-line no-promise-executor-return
   new Promise((resolve) => chrome.storage.sync.set(items, () => resolve(undefined)));
 
 const removeFromStore = (key: string) =>
+  // eslint-disable-next-line no-promise-executor-return
   new Promise((resolve) => chrome.storage.sync.remove(key, () => resolve(undefined)));
 
 const getStoredConnection = () => getFromStore("connection") as Promise<StoredConnection>;
@@ -49,11 +51,11 @@ export const connection = () => {
       };
     }) as Promise<Connection>;
 
-  const set = (connection: Connection) => {
+  const set = (conn: Connection) => {
     const keySuffix = random(8);
     const storedConnection: StoredConnection = {
-      ...connection,
-      apiKey: AES.encrypt(connection.apiKey, keyPrefix + keySuffix).toString(),
+      ...conn,
+      apiKey: AES.encrypt(conn.apiKey, keyPrefix + keySuffix).toString(),
       keySuffix,
     };
     return setInStore({ connection: storedConnection });
@@ -66,11 +68,11 @@ export const connection = () => {
 
 export const template = () => {
   const get = () => getFromStore("templates") as Promise<Templates>;
-  const set = (name: string, template: Template) =>
+  const set = (name: string, tpl: Template) =>
     get()
       .then((tpls) => {
         const templates = tpls || [];
-        templates.unshift({ name, template });
+        templates.unshift({ name, template: tpl });
         return { templates };
       })
       .then(setInStore);
@@ -88,14 +90,10 @@ export const template = () => {
     get()
       .then((tpls) => {
         const templates = tpls || [];
-        console.log(templates);
-        const template = templates.find((t) => t.name === name);
-        console.log(template);
-
-        if (template) {
+        const tpl = templates.find((t) => t.name === name);
+        if (tpl) {
           const newTemplates = templates.filter((t) => t && t.name !== name);
-          newTemplates.unshift(template);
-          console.log(newTemplates);
+          newTemplates.unshift(tpl);
           return {
             templates: newTemplates,
           };
