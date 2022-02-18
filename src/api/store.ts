@@ -1,9 +1,5 @@
-import { decrypt, encrypt } from "./crypto";
 import { Connection, Template, Templates } from "./types";
-
-type StoredConnection = Connection & {
-  keySuffix: string;
-};
+import { decrypt, encrypt } from "./webcrypto";
 
 const getFromStore = (key: string) =>
   new Promise((resolve) => {
@@ -24,28 +20,28 @@ const removeFromStore = (key: string) =>
   // eslint-disable-next-line no-promise-executor-return
   new Promise((resolve) => chrome.storage.sync.remove(key, () => resolve(undefined)));
 
-const getStoredConnection = () => getFromStore("connection") as Promise<StoredConnection>;
+const getStoredConnection = () => getFromStore("connection") as Promise<Connection>;
 
 export const connection = () => {
-  const get = () =>
-    getStoredConnection().then((storedConnection: StoredConnection) => {
-      if (!storedConnection) {
-        return undefined;
-      }
-      return {
-        url: storedConnection.url,
-        apiKey: decrypt({ encrypted: storedConnection.apiKey, keySuffix: storedConnection.keySuffix }),
-      };
-    }) as Promise<Connection>;
-
-  const set = (conn: Connection) => {
-    const encrypted = encrypt(conn.apiKey);
-    const storedConnection: StoredConnection = {
-      ...conn,
-      apiKey: encrypted.encrypted,
-      keySuffix: encrypted.keySuffix,
+  const get = async (): Promise<Connection | undefined> => {
+    const storedConnection = await getStoredConnection();
+    if (!storedConnection) {
+      return undefined;
+    }
+    const apiKey = await decrypt(storedConnection.apiKey);
+    return {
+      url: storedConnection.url,
+      apiKey,
     };
-    return setInStore({ connection: storedConnection });
+  };
+
+  const set = async (conn: Connection) => {
+    const encrypted = await encrypt(conn.apiKey);
+    const storedConnection: Connection = {
+      ...conn,
+      apiKey: encrypted,
+    };
+    await setInStore({ connection: storedConnection });
   };
 
   const remove = () => removeFromStore("connection");
