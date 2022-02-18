@@ -37,13 +37,13 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) 
 
     chrome.notifications.create(`bugshot-${connection.url}/issues/${issue.id}`, {
       type: "basic",
-      iconUrl: "camera.png",
+      iconUrl: "images/bugshot-icon-128x128.png",
       title: `Created issue ${issue.id}`,
       message: `Bugshot create a new issue with the id ${issue.id}`,
       buttons: [
         {
           title: "Open",
-          iconUrl: "camera.png",
+          iconUrl: "images/bugshot-icon-128x128.png",
         },
       ],
     });
@@ -53,7 +53,7 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) 
       chrome.tabs.getCurrent((tab) => {
         if (tab?.id) {
           // then close the screenshot tab
-          chrome.tabs.remove(tab.id);
+          // chrome.tabs.remove(tab.id);
         }
       });
     }, 100);
