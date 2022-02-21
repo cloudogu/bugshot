@@ -26,3 +26,15 @@ Whenever a change is made to the manifest or background bundle, the extension mu
 To troubleshoot the service worker, the devtools can be opened with the `service worker` link (2 in the screenshot below).
 
 ![Load extension](docs/assets/dev-3.png)
+
+## Deployment
+
+At the moment there is no release automation.
+As long as the automation does not exists, you have to manually execute the following steps
+
+* Increment the version in the `package.json`
+* Create a commit
+* Create a tag
+* Build the package with `yarn build`
+* Upload the new package from the dist folder to the [WebStore](https://chrome.google.com/webstore/devconsole)
+* Submit the new version for verification
