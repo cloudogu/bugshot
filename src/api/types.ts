@@ -46,7 +46,7 @@ export type Template = {
   tracker_id: number;
   status_id: number;
   priority_id: number;
-  category_id: number;
+  category_id?: number;
   parent_issue_id?: number;
   custom_fields: CustomField[];
 };
@@ -108,7 +108,7 @@ export type Issue = {
   status: IdAndName;
   priority: IdAndName;
   author: IdAndName;
-  category: IdAndName;
+  category?: IdAndName;
   fixed_version: IdAndName;
   parent?: {
     id: number;

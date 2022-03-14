@@ -1,5 +1,5 @@
 import { BugShotMessage } from "api/types";
-import { converIssueToTemplate } from "./api/convert";
+import { convertIssueToTemplate } from "./api/convert";
 import createRedmineApi from "./api/redmine";
 import { connection, template } from "./api/store";
 
@@ -107,7 +107,7 @@ chrome.runtime.onMessage.addListener(function (msg) {
       .get()
       .then(createRedmineApi)
       .then((api) => api.issue(`${msg.url}.json`))
-      .then(converIssueToTemplate)
+      .then(convertIssueToTemplate)
       .then((tpl) => template().set(msg.name, tpl));
   }
 });

@@ -1,8 +1,8 @@
 import { Issue, Template } from "./types";
 
-export const converIssueToTemplate = (issue: Issue): Template => ({
+export const convertIssueToTemplate = (issue: Issue): Template => ({
   project_id: issue.project.id,
-  category_id: issue.category.id,
+  category_id: issue?.category?.id,
   priority_id: issue.priority.id,
   status_id: issue.status.id,
   tracker_id: issue.tracker.id,
