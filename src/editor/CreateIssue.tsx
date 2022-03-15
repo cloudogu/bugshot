@@ -53,7 +53,7 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) 
       chrome.tabs.getCurrent((tab) => {
         if (tab?.id) {
           // then close the screenshot tab
-          // chrome.tabs.remove(tab.id);
+          chrome.tabs.remove(tab.id);
         }
       });
     }, 100);
