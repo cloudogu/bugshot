@@ -1,13 +1,12 @@
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
-import { Screenshot, BugShot } from "../api/types";
+import { Screenshot, BugShot, Connection } from "../api/types";
 import Button from "../shared/Button";
 import ErrorNotification from "../shared/ErrorNotification";
 import FormContainer from "../shared/FormContainer";
 import InputField from "../shared/InputField";
 import Select from "../shared/Select";
 import Textarea from "../shared/Textarea";
-import { Connection } from "./useConnection";
 import useCreateIssue, { CreatedIssue } from "./useCreateIssue";
 import { TemplateEntry } from "./useTemplates";
 
