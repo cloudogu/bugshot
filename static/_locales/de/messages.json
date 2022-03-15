@@ -86,6 +86,15 @@
   "gettingStartedEasyRedmineAltText": {
     "message": "EasyRedmine Vorlage erstellen"
   },
+  "promptMessage": {
+    "message": "Bitte geben Sie den Namen Ihrer neuen BugShot Vorlage ein:"
+  },
+  "promptDefaultValue": {
+    "message": "Standard"
+  },
+  "externalLinkTitle": {
+    "message": "Neue BugShot Vorlage hinzufügen"
+  },
   "loading": {
     "message": "Lädt..."
   },

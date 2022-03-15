@@ -86,6 +86,15 @@
   "gettingStartedEasyRedmineAltText": {
     "message": "Create EasyRedmine template"
   },
+  "promptMessage": {
+    "message": "Please enter the name of your BugShot template:"
+  },
+  "promptDefaultValue": {
+    "message": "Default"
+  },
+  "externalLinkTitle": {
+    "message": "Add new BugShot template"
+  },
   "loading": {
     "message": "Loading..."
   },
