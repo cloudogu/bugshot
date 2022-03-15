@@ -72,7 +72,7 @@ function addBugShotLink() {
   }
 
   // for EasyRedmine
-  const easyMenu = document.querySelector(".easy-panel-handler-container");
+  const easyMenu = document.querySelector(".issue-detail-header");
   if (easyMenu) {
     const createLink = createEasyRedmineBugShotLink();
     easyMenu.append(createLink);
