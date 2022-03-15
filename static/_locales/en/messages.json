@@ -95,6 +95,15 @@
   "externalLinkTitle": {
     "message": "Add new BugShot template"
   },
+  "notificationTitle": {
+    "message": "Created issue"
+  },
+  "notificationMessage": {
+    "message": "Bugshot created a new issue with the id"
+  },
+  "notificationButtonTitle": {
+    "message": "Open"
+  },
   "loading": {
     "message": "Loading..."
   },
