@@ -99,7 +99,7 @@
     "message": "Ticket erstellt"
   },
   "notificationMessage": {
-    "message": "Bugshot hat ein neues Ticket mit folgender Id erstellt:"
+    "message": "BugShot hat ein neues Ticket mit folgender Id erstellt:"
   },
   "notificationButtonTitle": {
     "message": "Öffnen"
