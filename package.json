@@ -53,6 +53,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "isomorphic-fetch": "^3.0.0",
     "postcss": "^8.4.6",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.5.1",
