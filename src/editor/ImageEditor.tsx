@@ -31,6 +31,7 @@ const ImageEditor: FC<Props> = ({ stageRef, image }) => {
           getStage={setStage}
           defaultPluginName="arrow"
           crossOrigin="anonymous"
+          language={chrome.i18n.getUILanguage()}
         />
       </div>
     </div>
