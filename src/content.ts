@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 
 function addTemplate() {
-  const name = prompt("Please enter the name for the BugShot Template:", "Default");
+  const name = prompt(chrome.i18n.getMessage("promptMessage"), chrome.i18n.getMessage("promptDefaultValue"));
 
   // send message with link and insert name to background script
   chrome.runtime.sendMessage({
@@ -15,7 +15,7 @@ function createBaseLink() {
   link.classList.add("icon");
   link.id = "add_as_bugshot_template";
   link.rel = "nofollow";
-  link.title = "Add as BugShot template";
+  link.title = chrome.i18n.getMessage("externalLinkTitle");
   link.href = "#";
   return link;
 }

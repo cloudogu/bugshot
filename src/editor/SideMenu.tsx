@@ -36,10 +36,10 @@ const SideMenu: FC<Props> = ({ screenshot, bugshot }) => {
   return (
     <Container>
       <Tabs>
-        <Tab title="Create Issue">
+        <Tab title={chrome.i18n.getMessage("createIssueTitle")}>
           <IssueEditor screenshot={screenshot} bugshot={bugshot} templates={entries} />
         </Tab>
-        <Tab title="Settings">
+        <Tab title={chrome.i18n.getMessage("settingsTitle")}>
           <Settings templates={entries} />
         </Tab>
       </Tabs>
