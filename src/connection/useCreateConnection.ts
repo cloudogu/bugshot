@@ -26,7 +26,7 @@ const useCreateConnection = () => {
     });
     api
       .me()
-      .then((me) => ({ url, apiKey: me.api_key }))
+      .then((me) => ({ url, apiKey: me.api_key, type: connection.type }))
       .then(store().set)
       .then(callback)
       .catch(setError)

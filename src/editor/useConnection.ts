@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { connection as store } from "../api/store";
-
-export type Connection = {
-  url: string;
-  apiKey: string;
-};
+import { Connection } from "../api/types";
 
 const useConnection = () => {
   const [connection, setConnection] = useState<Connection>();

@@ -1,11 +1,12 @@
 import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import { InitialConnection } from "api/types";
+import { connectionTypes, InitialConnection } from "../api/types";
 import Button from "../shared/Button";
 import ErrorNotification from "../shared/ErrorNotification";
 import FormContainer from "../shared/FormContainer";
 import GettingStarted from "../shared/GettingStarted";
 import InputField from "../shared/InputField";
+import Select from "../shared/Select";
 import Title from "../shared/Title";
 import useCreateConnection from "./useCreateConnection";
 
@@ -64,6 +65,11 @@ const CreateConnection: FC = () => {
           {...register("password", { required: true })}
           error={errors.password && "Password is required"}
         />
+        <Select label="Type" {...register("type", { required: true })} error={errors.type && "Type is required"}>
+          {connectionTypes.map((type) => (
+            <option key={type}>{type}</option>
+          ))}
+        </Select>
         <Button type="submit" isLoading={isLoading}>
           Login
         </Button>

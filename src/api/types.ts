@@ -12,13 +12,18 @@ export type BugShotMessage = {
   bugShot: BugShot;
 };
 
-export type Connection = {
+export const connectionTypes = ["Redmine", "EasyRedmine"] as const;
+
+type BaseConnection = {
   url: string;
+  type: typeof connectionTypes[number];
+}
+
+export type Connection = BaseConnection & {
   apiKey: string;
 };
 
-export type InitialConnection = {
-  url: string;
+export type InitialConnection = BaseConnection & {
   username: string;
   password: string;
 };

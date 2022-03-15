@@ -30,7 +30,7 @@ export const connection = () => {
     }
     const apiKey = await decrypt(storedConnection.apiKey);
     return {
-      url: storedConnection.url,
+      ...storedConnection,
       apiKey,
     };
   };
