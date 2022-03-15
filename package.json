@@ -9,6 +9,7 @@
     "develop": "cross-env NODE_ENV=development webpack --watch",
     "format": "prettier --write src static",
     "lint": "eslint src/**/*.{ts,tsx} static/**/*.html",
+    "typecheck": "tsc --noEmit",
     "analyze-bundles": "cross-env NODE_ENV=production ANALYZE_BUNDLES=true webpack"
   },
   "dependencies": {
