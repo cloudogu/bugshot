@@ -1,0 +1,119 @@
+{
+  "appDesc": {
+    "message": "Visuelle Fehler einfangen und an Redmine melden."
+  },
+  "connectionUrl": {
+    "message": "Url"
+  },
+  "connectionApiKeyHint": {
+    "message": "Die Anmeldedaten werden nur verwendet, um den API-Schlüssel von Redmine abzurufen. Der API-Schlüssel wird verschlüsselt im synchronisierten Speicher des Browsers abgelegt und für jede weitere Anfrage verwendet."
+  },
+  "connectionUsername": {
+    "message": "Benutzername"
+  },
+  "connectionPassword": {
+    "message": "Passwort"
+  },
+  "connectionType": {
+    "message": "Typ"
+  },
+  "connectionLoginButton": {
+    "message": "Anmelden"
+  },
+  "createIssueTitle": {
+    "message": "Ticket erstellen"
+  },
+  "createIssueTemplate": {
+    "message": "Vorlage"
+  },
+  "createIssueSubject": {
+    "message": "Betreff"
+  },
+  "createIssueDesc": {
+    "message": "Beschreibung"
+  },
+  "createIssueSaveButton": {
+    "message": "Speichern"
+  },
+  "settingsTitle": {
+    "message": "Einstellungen"
+  },
+  "settingsTemplates": {
+    "message": "Vorlagen"
+  },
+  "settingsLogout": {
+    "message": "Abmelden"
+  },
+  "gettingStartedTitle": {
+    "message": "Erste Schritte"
+  },
+  "gettingStarted1": {
+    "message": "Nachdem Sie den "
+  },
+  "gettingStarted2": {
+    "message": "BugShot"
+  },
+  "gettingStarted3": {
+    "message": " Link geklickt haben, müssen einen Namen für Ihre neue Vorlage vergeben."
+  },
+  "gettingStarted4": {
+    "message": "Nachdem Sie eine Vorlage erstellt haben, klicken Sie auf \"Neu laden\"."
+  },
+  "gettingStartedAltText": {
+    "message": "Name der Vorlage"
+  },
+  "gettingStartedRedmine1": {
+    "message": "Bevor Sie ein Redmine Ticket erstellen können, müssen wir eine Vorlage erstellen. Dazu wählen Sie ein bestehendes Ticket aus Ihrer Redmine-Instanz als Referenz. Klicken Sie dann auf "
+  },
+  "gettingStartedRedmine2": {
+    "message": "BugShot"
+  },
+  "gettingStartedRedmine3": {
+    "message": "im Aktionsmenü des Tickets."
+  },
+  "gettingStartedRedmineImageAltText": {
+    "message": "Redmine Vorlage erstellen"
+  },
+  "gettingStartedEasyRedmine1": {
+    "message": "Bevor Sie ein EasyRedmine Ticket erstellen können, müssen wir eine Vorlage erstellen. Dazu wählen Sie einen Vorgang aus Ihrer EasyRedmine-Instanz als Referenz. Klicken Sie dann auf "
+  },
+  "gettingStartedEasyRedmine2": {
+    "message": "den BugShot icon"
+  },
+  "gettingStartedEasyRedmine3": {
+    "message": "."
+  },
+  "gettingStartedEasyRedmineAltText": {
+    "message": "EasyRedmine Vorlage erstellen"
+  },
+  "promptMessage": {
+    "message": "Bitte geben Sie den Namen Ihrer neuen BugShot Vorlage ein:"
+  },
+  "promptDefaultValue": {
+    "message": "Standard"
+  },
+  "externalLinkTitle": {
+    "message": "Neue BugShot Vorlage hinzufügen"
+  },
+  "notificationTitle": {
+    "message": "Ticket erstellt"
+  },
+  "notificationMessage": {
+    "message": "BugShot hat ein neues Ticket mit folgender Id erstellt:"
+  },
+  "notificationButtonTitle": {
+    "message": "Öffnen"
+  },
+  "loading": {
+    "message": "Lädt..."
+  },
+  "reload": {
+    "message": "Neu laden"
+  },
+  "errorConnectionNotConfigured": {
+    "message": "Verbindung nicht konfiguriert"
+  },
+  "errorMissingScreenshot": {
+    "message": "Screenshot nicht gefunden"
+  }
+}
