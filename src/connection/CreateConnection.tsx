@@ -45,33 +45,36 @@ const CreateConnection: FC = () => {
       <ErrorNotification error={error} />
       <FormContainer>
         <InputField
-          label="URL"
+          label={chrome.i18n.getMessage("connectionUrl")}
           autoFocus
           {...register("url", { required: true })}
           error={errors.url && "Url is required"}
         />
         <p className="bg-blue-500 rounded-md p-4 text-white">
-          The credentials are used only to retrieve the api key from Redmine. The api key is used for every further
-          request. The key is stored encrypted in the browser&apos;s snychronized storage.
+          {chrome.i18n.getMessage("connectionApiKeyHint")}
         </p>
         <InputField
-          label="Username"
+          label={chrome.i18n.getMessage("connectionUsername")}
           {...register("username", { required: true })}
           error={errors.username && "Username is required"}
         />
         <InputField
-          label="Password"
+          label={chrome.i18n.getMessage("connectionPassword")}
           type="password"
           {...register("password", { required: true })}
           error={errors.password && "Password is required"}
         />
-        <Select label="Type" {...register("type", { required: true })} error={errors.type && "Type is required"}>
+        <Select
+          label={chrome.i18n.getMessage("connectionType")}
+          {...register("type", { required: true })}
+          error={errors.type && "Type is required"}
+        >
           {connectionTypes.map((type) => (
             <option key={type}>{type}</option>
           ))}
         </Select>
         <Button type="submit" isLoading={isLoading}>
-          Login
+          {chrome.i18n.getMessage("connectionLoginButton")}
         </Button>
       </FormContainer>
     </form>

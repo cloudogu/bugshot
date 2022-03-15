@@ -15,11 +15,11 @@ const IssueEditor: FC<Props> = ({ bugshot, screenshot, templates }) => {
   const { connection, isLoading } = useConnection();
 
   if (isLoading || !bugshot) {
-    return <p>Loading ...</p>;
+    return <p>{chrome.i18n.getMessage("loading")}</p>;
   }
 
   if (!connection) {
-    return <ErrorNotification error="Connection not configured" />;
+    return <ErrorNotification error={chrome.i18n.getMessage("errorConnectionNotConfigured")}/>;
   }
 
   return <CreateIssue connection={connection} bugshot={bugshot} screenshot={screenshot} templates={templates} />;

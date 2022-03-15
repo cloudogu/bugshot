@@ -1,0 +1,101 @@
+{
+  "appDesc": {
+    "message": "Capture visual bugs and report it to redmine."
+  },
+  "connectionUrl": {
+    "message": "Url"
+  },
+  "connectionApiKeyHint": {
+    "message": "The credentials are used only to retrieve the api key from Redmine. The api key is used for every further request. The key is stored encrypted in the browser&apos;s synchronized storage."
+  },
+  "connectionUsername": {
+    "message": "Username"
+  },
+  "connectionPassword": {
+    "message": "Password"
+  },
+  "connectionType": {
+    "message": "Type"
+  },
+  "connectionLoginButton": {
+    "message": "Login"
+  },
+  "createIssueTitle": {
+    "message": "Create Issue"
+  },
+  "createIssueTemplate": {
+    "message": "Template"
+  },
+  "createIssueSubject": {
+    "message": "Subject"
+  },
+  "createIssueDesc": {
+    "message": "Description"
+  },
+  "createIssueSaveButton": {
+    "message": "Save"
+  },
+  "settingsTitle": {
+    "message": "Settings"
+  },
+  "settingsTemplates": {
+    "message": "Templates"
+  },
+  "settingsLogout": {
+    "message": "Logout"
+  },
+  "gettingStartedTitle": {
+    "message": "Getting started"
+  },
+  "gettingStarted1": {
+    "message": "After you have clicked the "
+  },
+  "gettingStarted2": {
+    "message": "BugShot"
+  },
+  "gettingStarted3": {
+    "message": " link, you have to choose a name for the new template."
+  },
+  "gettingStarted4": {
+    "message": "After you have named your template, click the reload button below."
+  },
+  "gettingStartedAltText": {
+    "message": "Name template"
+  },
+  "gettingStartedRedmine1": {
+    "message": "Before you can create a Redmine issue, we have to create a template. To create an template, choose an issue from your Redmine instance as reference. Then click "
+  },
+  "gettingStartedRedmine2": {
+    "message": "BugShot"
+  },
+  "gettingStartedRedmine3": {
+    "message": " from the issue action menu."
+  },
+  "gettingStartedRedmineImageAltText": {
+    "message": "Create Redmine template"
+  },
+  "gettingStartedEasyRedmine1": {
+    "message": "Before you can create a EasyRedmine issue, we have to create a template. To create an template, choose an issue from your EasyRedmine instance as reference. Then click "
+  },
+  "gettingStartedEasyRedmine2": {
+    "message": "the BugShot icon"
+  },
+  "gettingStartedEasyRedmine3": {
+    "message": "."
+  },
+  "gettingStartedEasyRedmineAltText": {
+    "message": "Create EasyRedmine template"
+  },
+  "loading": {
+    "message": "Loading..."
+  },
+  "reload": {
+    "message": "Reload"
+  },
+  "errorConnectionNotConfigured": {
+    "message": "Connection not configured"
+  },
+  "errorMissingScreenshot": {
+    "message": "Screenshot not found"
+  }
+}

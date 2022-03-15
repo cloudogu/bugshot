@@ -1095,10 +1095,10 @@
     "@babel/helper-validator-identifier" "^7.15.7"
     to-fast-properties "^2.0.0"
 
-"@cloudogu/react-img-editor@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@cloudogu/react-img-editor/-/react-img-editor-0.3.0.tgz#4d874b3651bcd849cebc55c9fd8c09e3c003fffb"
-  integrity sha512-tixtpysc508agDZZmLPgvv+fJO2qeG/s6470yAH2auufwdGH8JJYnvrjZZNunPFyj2/8ajAnpUWuHCil4xo+nA==
+"@cloudogu/react-img-editor@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@cloudogu/react-img-editor/-/react-img-editor-0.4.0.tgz#4919c3f0a8f25bb4a8d2fed4e8a9e651c13c456e"
+  integrity sha512-rw466EMTzA7cjaTJiO64odP4f1NGAWkO0hagYVwS5Tp6CmSLEDvwHdRMfWUX8wYXislyX/xzUPZGxTn3S8YLdA==
   dependencies:
     konva "^4.1.2"
     pubsub-js "^1.8.0"

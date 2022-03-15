@@ -17,7 +17,7 @@ const ImageEditor: FC<Props> = ({ stageRef, image }) => {
   };
 
   if (!image) {
-    return <p>Could not find Screenshot</p>;
+    return <p>{chrome.i18n.getMessage("errorMissingScreenshot")}</p>;
   }
 
   return (

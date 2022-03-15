@@ -9,7 +9,7 @@ type Props = {
 const TemplateTutorial: FC<Props> = ({ reload }) => (
   <GettingStarted>
     <Button className="mt-6 w-full" onClick={reload}>
-      Reload
+      {chrome.i18n.getMessage("reload")}
     </Button>
   </GettingStarted>
 );

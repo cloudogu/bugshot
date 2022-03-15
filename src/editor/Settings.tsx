@@ -39,15 +39,15 @@ const Settings: FC<EditorProps> = ({ templates }) => {
   };
   return (
     <>
-      <h2 className="text-xl font-bold py-4 mt-2">Templates</h2>
+      <h2 className="text-xl font-bold py-4 mt-2">{chrome.i18n.getMessage("settingsTemplates")}</h2>
       <ul className="w-full">
         {templates.map((template) => (
           <TemplateLine key={template.name} templates={templates} template={template} />
         ))}
       </ul>
-      <h2 className="text-xl font-bold py-4">Logout</h2>
+      <h2 className="text-xl font-bold py-4">{chrome.i18n.getMessage("settingsLogout")}</h2>
       <Button className="w-full" onClick={logout} isLoading={isLoading}>
-        Logout
+        {chrome.i18n.getMessage("settingsLogout")}
       </Button>
     </>
   );

@@ -12,20 +12,22 @@ const Img: FC<ImgProps> = ({ src, alt }) => <img className="my-4 border-2 shadow
 const Redmine: FC = () => (
   <>
     <p>
-      Before you can create a Redmine issue, we have to create a template. To create an template, choose an issue from
-      your Redmine instance as reference. Then click <strong>BugShot</strong> from the issue action menu.
+      {chrome.i18n.getMessage("gettingStartedRedmine1")}
+      <strong>{chrome.i18n.getMessage("gettingStartedRedmine2")}</strong>
+      {chrome.i18n.getMessage("gettingStartedRedmine3")}.
     </p>
-    <Img src="./images/create-template-1.png" alt="Create Redmine template" />
+    <Img src="./images/create-template-1.png" alt={chrome.i18n.getMessage("gettingStartedRedmineAltText")} />
   </>
 );
 
 const EasyRedmine: FC = () => (
   <>
     <p>
-      Before you can create a EasyRedmine issue, we have to create a template. To create an template, choose an issue
-      from your EasyRedmine instance as reference. Then click <strong>the BugShot icon</strong>.
+      {chrome.i18n.getMessage("gettingStartedEasyRedmine1")}
+      <strong> {chrome.i18n.getMessage("gettingStartedEasyRedmine2")}</strong>
+      {chrome.i18n.getMessage("gettingStartedEasyRedmine3")}
     </p>
-    <Img src="./images/create-template-3.png" alt="Create EasyRedmine template" />
+    <Img src="./images/create-template-3.png" alt={chrome.i18n.getMessage("gettingStartedEasyRedmineAltText")} />
   </>
 );
 
@@ -34,13 +36,15 @@ const GettingStarted: FC = ({ children }) => {
 
   return (
     <div className="p-4">
-      <Title className="mb-4">Getting started {connection?.type}</Title>
+      <Title className="mb-4">{chrome.i18n.getMessage("gettingStartedTitle")}</Title>
       {connection?.type === "EasyRedmine" ? <EasyRedmine /> : <Redmine />}
       <p>
-        After you have clicked the <strong>BugShot</strong> link, you have to choose a name for the new template.
+        {chrome.i18n.getMessage("gettingStarted1")}
+        <strong>{chrome.i18n.getMessage("gettingStarted2")}</strong>
+        {chrome.i18n.getMessage("gettingStarted3")}
       </p>
-      <Img src="./images/create-template-2.png" alt="Name template" />
-      <p>After you have named your template, click the reload button below.</p>
+      <Img src="./images/create-template-2.png" alt={chrome.i18n.getMessage("gettingStartedAltText")} />
+      <p>{chrome.i18n.getMessage("gettingStarted4")}</p>
       {children}
     </div>
   );
