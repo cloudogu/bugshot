@@ -94,7 +94,7 @@ const CreateIssue: FC<Props> = ({connection, screenshot, bugshot, templates}) =>
         <InputField
           label={chrome.i18n.getMessage("createIssueSubject")}
           {...register("subject", {required: true})}
-          error={errors.subject ? "Subject is required" : null}
+          error={errors.subject ? chrome.i18n.getMessage("validationSubjectMissing") : null}
         />
         <Textarea label={chrome.i18n.getMessage("createIssueDesc")}
                   {...register("description")} />
