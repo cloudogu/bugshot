@@ -50,7 +50,7 @@ const CreateConnection: FC = () => {
           {...register("url", { required: true })}
           error={errors.url && chrome.i18n.getMessage("validationUrlMissing")}
         />
-        <p className="bg-blue-600 rounded-md p-4 text-white">{chrome.i18n.getMessage("connectionApiKeyHint")}</p>
+        <p className="bg-blue-500 rounded-md p-4 text-white">{chrome.i18n.getMessage("connectionApiKeyHint")}</p>
         <InputField
           label={chrome.i18n.getMessage("connectionUsername")}
           {...register("username", { required: true })}

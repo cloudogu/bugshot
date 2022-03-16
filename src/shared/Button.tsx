@@ -16,7 +16,7 @@ const Button: FC<Props> = ({ isLoading, children, className, ...props }) => (
   // eslint-disable-next-line react/button-has-type
   <button
     className={classNames(
-      "bg-emerald-700 hover:bg-emerald-900 text-white font-extrabold py-2 px-4 rounded inline-flex items-center justify-center",
+      "bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded inline-flex items-center justify-center",
       className,
       {
         "cursor-not-allowed": isLoading,

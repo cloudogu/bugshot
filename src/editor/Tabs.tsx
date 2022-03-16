@@ -30,9 +30,9 @@ const Tabs: FC<TabsProps> = ({ children }) => {
             key={tab.props.title}
             onClick={() => setActive(index)}
             className={classNames(
-              "flex-1 py-4 px-6 text-gray-600 hover:text-blue-600 focus:outline-none border-b-2 font-medium",
+              "flex-1 py-4 px-6 text-gray-500 hover:text-blue-500 focus:outline-none border-b-2 font-medium",
               {
-                "font-bold text-blue-600 border-blue-600": index === active,
+                "font-bold text-blue-500 border-blue-500": index === active,
               }
             )}
           >
