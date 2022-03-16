@@ -40,11 +40,9 @@ const GettingStarted: FC = ({ children }) => {
       {connection?.type === "EasyRedmine" ? <EasyRedmine /> : <Redmine />}
       <p>
         {chrome.i18n.getMessage("gettingStarted1")}
-        <strong>{chrome.i18n.getMessage("gettingStarted2")}</strong>
-        {chrome.i18n.getMessage("gettingStarted3")}
       </p>
       <Img src="./images/create-template-2.png" alt={chrome.i18n.getMessage("gettingStartedAltText")} />
-      <p>{chrome.i18n.getMessage("gettingStarted4")}</p>
+      <p>{chrome.i18n.getMessage("gettingStarted2")}</p>
       {children}
     </div>
   );

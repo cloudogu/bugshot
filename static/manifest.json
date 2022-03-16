@@ -23,7 +23,7 @@
       "256": "images/bugshot-icon-256x256.png",
       "512": "images/bugshot-icon-512x512.png"
     },
-    "default_title": "Report a visual bug",
+    "default_title": "__MSG_appDefaultTitle__",
     "default_popup": "connection.html"
   },
   "icons": {

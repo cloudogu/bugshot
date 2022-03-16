@@ -41,18 +41,16 @@ const CreateConnection: FC = () => {
 
   return (
     <form className="p-8" onSubmit={handleSubmit(onSubmit)}>
-      <Title>Create Redmine Connection</Title>
+      <Title>{chrome.i18n.getMessage("connectionTitle")}</Title>
       <ErrorNotification error={error} />
       <FormContainer>
         <InputField
-          label={chrome.i18n.getMessage("connectionUrl")}
+          label={`${connectionTypes[0]} ${chrome.i18n.getMessage("connectionUrl")}`}
           autoFocus
           {...register("url", { required: true })}
           error={errors.url && "Url is required"}
         />
-        <p className="bg-blue-500 rounded-md p-4 text-white">
-          {chrome.i18n.getMessage("connectionApiKeyHint")}
-        </p>
+        <p className="bg-blue-500 rounded-md p-4 text-white">{chrome.i18n.getMessage("connectionApiKeyHint")}</p>
         <InputField
           label={chrome.i18n.getMessage("connectionUsername")}
           {...register("username", { required: true })}

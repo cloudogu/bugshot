@@ -2,6 +2,12 @@
   "appDesc": {
     "message": "Capture visual bugs and report it to redmine."
   },
+  "appDefaultTitle": {
+    "message": "Visuelle Fehler melden"
+  },
+  "connectionTitle": {
+    "message": "Create Redmine Connection"
+  },
   "connectionUrl": {
     "message": "Url"
   },
@@ -48,16 +54,10 @@
     "message": "Getting started"
   },
   "gettingStarted1": {
-    "message": "After you have clicked the "
+    "message": "Afterwards you have to choose a name for the new template."
   },
   "gettingStarted2": {
-    "message": "BugShot"
-  },
-  "gettingStarted3": {
-    "message": " link, you have to choose a name for the new template."
-  },
-  "gettingStarted4": {
-    "message": "After you have named your template, click the reload button below."
+    "message": "As soon as your template has been created, click the reload button below or open a new BugShot window."
   },
   "gettingStartedAltText": {
     "message": "Name template"

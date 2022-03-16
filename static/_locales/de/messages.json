@@ -2,6 +2,12 @@
   "appDesc": {
     "message": "Visuelle Fehler einfangen und an Redmine melden."
   },
+  "appDefaultTitle": {
+    "message": "Visuelle Fehler melden"
+  },
+  "connectionTitle": {
+    "message": "Redmine verbinden"
+  },
   "connectionUrl": {
     "message": "Url"
   },
@@ -48,22 +54,16 @@
     "message": "Erste Schritte"
   },
   "gettingStarted1": {
-    "message": "Nachdem Sie den "
+    "message": "Anschließend vergeben Sie bitte einen Namen für Ihre neue Vorlage."
   },
   "gettingStarted2": {
-    "message": "BugShot"
-  },
-  "gettingStarted3": {
-    "message": " Link geklickt haben, müssen einen Namen für Ihre neue Vorlage vergeben."
-  },
-  "gettingStarted4": {
-    "message": "Nachdem Sie eine Vorlage erstellt haben, klicken Sie auf \"Neu laden\"."
+    "message": "Nachdem Sie eine Vorlage erstellt haben, klicken Sie auf \"Neu laden\" oder öffnen Sie ein neues BugShot Fenster."
   },
   "gettingStartedAltText": {
     "message": "Name der Vorlage"
   },
   "gettingStartedRedmine1": {
-    "message": "Bevor Sie ein Redmine Ticket erstellen können, müssen wir eine Vorlage erstellen. Dazu wählen Sie ein bestehendes Ticket aus Ihrer Redmine-Instanz als Referenz. Klicken Sie dann auf "
+    "message": "Damit BugShot neue Redmine Tickets erstellen kann, muss zuerst eine Vorlage erstellt werden. Dazu wählen Sie ein bestehendes Ticket aus Ihrer Redmine-Instanz als Referenz. Klicken Sie dann auf "
   },
   "gettingStartedRedmine2": {
     "message": "BugShot"
@@ -75,10 +75,10 @@
     "message": "Redmine Vorlage erstellen"
   },
   "gettingStartedEasyRedmine1": {
-    "message": "Bevor Sie ein EasyRedmine Ticket erstellen können, müssen wir eine Vorlage erstellen. Dazu wählen Sie einen Vorgang aus Ihrer EasyRedmine-Instanz als Referenz. Klicken Sie dann auf "
+    "message": "Damit BugShot EasyRedmine Tickets erstellen kann, muss zuerst eine Vorlage erstellt werden. Dazu wählen Sie ein bestehendes Ticket aus Ihrer EasyRedmine-Instanz als Referenz. Klicken Sie dann auf den "
   },
   "gettingStartedEasyRedmine2": {
-    "message": "den BugShot icon"
+    "message": "BugShot Icon"
   },
   "gettingStartedEasyRedmine3": {
     "message": "."
@@ -87,7 +87,7 @@
     "message": "EasyRedmine Vorlage erstellen"
   },
   "promptMessage": {
-    "message": "Bitte geben Sie den Namen Ihrer neuen BugShot Vorlage ein:"
+    "message": "Bitte geben Sie einen Namen für Ihre neue BugShot Vorlage ein:"
   },
   "promptDefaultValue": {
     "message": "Standard"
