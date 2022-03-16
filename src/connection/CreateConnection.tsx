@@ -40,7 +40,7 @@ const CreateConnection: FC = () => {
   }
 
   return (
-    <form className="p-8" onSubmit={handleSubmit(onSubmit)}>
+    <form className="p-4" onSubmit={handleSubmit(onSubmit)}>
       <Title>{chrome.i18n.getMessage("connectionTitle")}</Title>
       <ErrorNotification error={error} />
       <FormContainer>

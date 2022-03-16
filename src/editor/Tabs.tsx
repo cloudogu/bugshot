@@ -7,7 +7,7 @@ type TabProps = {
 };
 
 export const Tab: FC<TabProps> = ({ title, children }) => (
-  <div className="p-8">
+  <div className="p-4">
     <Title>{title}</Title>
     {children}
   </div>
