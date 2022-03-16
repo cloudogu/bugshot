@@ -57,7 +57,7 @@
     "message": "Anschließend vergeben Sie bitte einen Namen für Ihre neue Vorlage."
   },
   "gettingStarted2": {
-    "message": "Nachdem Sie eine Vorlage erstellt haben, klicken Sie auf \"Neu laden\" oder öffnen Sie ein neues BugShot Fenster."
+    "message": "Nachdem Sie eine Vorlage erstellt haben, klicken Sie auf \"Neu laden\" oder öffnen ein neues BugShot Fenster."
   },
   "gettingStartedAltText": {
     "message": "Name der Vorlage"
@@ -69,7 +69,7 @@
     "message": "BugShot"
   },
   "gettingStartedRedmine3": {
-    "message": "im Aktionsmenü des Tickets."
+    "message": " im Aktionsmenü des Tickets."
   },
   "gettingStartedRedmineImageAltText": {
     "message": "Redmine Vorlage erstellen"

@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../shared/Button";
+import logout from "./logout";
 import { TemplateEntry } from "./useTemplates";
 
 type LineProps = {
@@ -26,17 +27,6 @@ type EditorProps = {
 
 const Settings: FC<EditorProps> = ({ templates }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const logout = () => {
-    setIsLoading(true);
-    chrome.runtime.sendMessage({
-      type: "logout",
-    });
-    chrome.tabs.getCurrent((tab) => {
-      if (tab?.id) {
-        chrome.tabs.remove(tab.id);
-      }
-    });
-  };
   return (
     <>
       <h2 className="text-xl font-bold py-4 mt-2">{chrome.i18n.getMessage("settingsTemplates")}</h2>
@@ -46,7 +36,14 @@ const Settings: FC<EditorProps> = ({ templates }) => {
         ))}
       </ul>
       <h2 className="text-xl font-bold py-4">{chrome.i18n.getMessage("settingsLogout")}</h2>
-      <Button className="w-full" onClick={logout} isLoading={isLoading}>
+      <Button
+        className="w-full"
+        onClick={() => {
+          setIsLoading(true);
+          logout();
+        }}
+        isLoading={isLoading}
+      >
         {chrome.i18n.getMessage("settingsLogout")}
       </Button>
     </>

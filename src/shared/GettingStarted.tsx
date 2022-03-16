@@ -1,5 +1,7 @@
 import React, { FC } from "react";
+import logout from "../editor/logout";
 import useConnection from "../editor/useConnection";
+import Button from "./Button";
 import Title from "./Title";
 
 type ImgProps = {
@@ -35,12 +37,13 @@ const GettingStarted: FC = ({ children }) => {
   const { connection } = useConnection();
 
   return (
-    <div className="p-4">
+    <div className="h-full p-4">
+      <Button className="bg-white hover:bg-gray-200 text-gray-500 top-2 right-2 absolute" onClick={logout}>
+        {chrome.i18n.getMessage("settingsLogout")}
+      </Button>
       <Title className="mb-4">{chrome.i18n.getMessage("gettingStartedTitle")}</Title>
       {connection?.type === "EasyRedmine" ? <EasyRedmine /> : <Redmine />}
-      <p>
-        {chrome.i18n.getMessage("gettingStarted1")}
-      </p>
+      <p>{chrome.i18n.getMessage("gettingStarted1")}</p>
       <Img src="./images/create-template-2.png" alt={chrome.i18n.getMessage("gettingStartedAltText")} />
       <p>{chrome.i18n.getMessage("gettingStarted2")}</p>
       {children}
