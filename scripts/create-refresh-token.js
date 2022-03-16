@@ -10,7 +10,7 @@ const readline = require("readline").createInterface({
 const config = require("./config");
 
 const createCredentials = async () => {
-  const url = `https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=${config.clientId}&redirect_uri=urn:ietf:wg:oauth:2.0:oob`;
+  const url = `https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/chromewebstore&client_id=${config.clientId}&access_type=offline&redirect_uri=urn:ietf:wg:oauth:2.0:oob`;
 
   console.log("Open the following link in your browser and insert the auth code below:");
   console.log();
@@ -25,7 +25,7 @@ const createCredentials = async () => {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: `client_id=${config.clientId}&client_secret=${config.clientSecret}&code=${authCode}&grant_type=authorization_code&redirect_uri=urn:ietf:wg:oauth:2.0:oob`,
+      body: `client_id=${config.clientId}&client_secret=${config.clientSecret}&code=${authCode}&grant_type=authorization_code&access_type=offline&redirect_uri=urn:ietf:wg:oauth:2.0:oob`,
     });
 
     if (!response.ok) {
