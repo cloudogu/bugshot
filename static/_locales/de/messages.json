@@ -50,6 +50,9 @@
   "settingsLogout": {
     "message": "Abmelden"
   },
+  "externalInstanceLink": {
+    "message": "Zu"
+  },
   "gettingStartedTitle": {
     "message": "Erste Schritte"
   },
@@ -57,7 +60,10 @@
     "message": "Anschließend vergeben Sie bitte einen Namen für Ihre neue Vorlage."
   },
   "gettingStarted2": {
-    "message": "Nachdem Sie eine Vorlage erstellt haben, klicken Sie auf \"Neu laden\" oder öffnen ein neues BugShot Fenster."
+    "message": "Nachdem Sie eine Vorlage erstellt haben, öffnen ein neues BugShot Fenster."
+  },
+  "gettingStarted2WithReload": {
+    "message": "Nachdem Sie eine Vorlage erstellt haben, laden Sie dieses Fenster neu oder öffnen ein neues BugShot Fenster."
   },
   "gettingStartedAltText": {
     "message": "Name der Vorlage"

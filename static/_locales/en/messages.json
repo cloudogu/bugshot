@@ -50,6 +50,9 @@
   "settingsLogout": {
     "message": "Logout"
   },
+  "externalInstanceLink": {
+    "message": "Open"
+  },
   "gettingStartedTitle": {
     "message": "Getting started"
   },
@@ -57,6 +60,9 @@
     "message": "Afterwards you have to choose a name for the new template."
   },
   "gettingStarted2": {
+    "message": "As soon as your template has been created, open a new BugShot window."
+  },
+  "gettingStarted2WithReload": {
     "message": "As soon as your template has been created, click the reload button below or open a new BugShot window."
   },
   "gettingStartedAltText": {
