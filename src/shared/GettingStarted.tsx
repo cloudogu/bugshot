@@ -33,7 +33,7 @@ const EasyRedmine: FC = () => (
   </>
 );
 
-const GettingStarted: FC = ({ children }) => {
+const GettingStarted: FC<{ withReload?: boolean }> = ({ children, withReload = false }) => {
   const { connection } = useConnection();
 
   return (
@@ -45,7 +45,7 @@ const GettingStarted: FC = ({ children }) => {
       {connection?.type === "EasyRedmine" ? <EasyRedmine /> : <Redmine />}
       <p>{chrome.i18n.getMessage("gettingStarted1")}</p>
       <Img src="./images/create-template-2.png" alt={chrome.i18n.getMessage("gettingStartedAltText")} />
-      <p>{chrome.i18n.getMessage("gettingStarted2")}</p>
+      <p>{chrome.i18n.getMessage(withReload ? "gettingStarted2WithReload" : "gettingStarted2")}</p>
       {children}
     </div>
   );

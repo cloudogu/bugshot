@@ -9,6 +9,7 @@ import InputField from "../shared/InputField";
 import Select from "../shared/Select";
 import Title from "../shared/Title";
 import useCreateConnection from "./useCreateConnection";
+import ExternalInstanceLink from "../editor/ExternalInstanceLink";
 
 const CreateConnection: FC = () => {
   const { create, isLoading, error } = useCreateConnection();
@@ -17,6 +18,7 @@ const CreateConnection: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues
   } = useForm<InitialConnection>();
 
   const onSubmit = (connection: InitialConnection) => {
@@ -32,9 +34,7 @@ const CreateConnection: FC = () => {
   if (configured) {
     return (
       <GettingStarted>
-        <Button className="mt-6 w-full" onClick={window.close}>
-          OK
-        </Button>
+        <ExternalInstanceLink url={getValues().url} type={getValues().type}/>
       </GettingStarted>
     );
   }
