@@ -48,24 +48,23 @@ const CreateConnection: FC = () => {
           label={`${connectionTypes[0]} ${chrome.i18n.getMessage("connectionUrl")}`}
           autoFocus
           {...register("url", { required: true })}
-          error={errors.url && "Url is required"}
+          error={errors.url && chrome.i18n.getMessage("validationUrlMissing")}
         />
         <p className="bg-blue-600 rounded-md p-4 text-white">{chrome.i18n.getMessage("connectionApiKeyHint")}</p>
         <InputField
           label={chrome.i18n.getMessage("connectionUsername")}
           {...register("username", { required: true })}
-          error={errors.username && "Username is required"}
+          error={errors.username && chrome.i18n.getMessage("validationUsernameMissing")}
         />
         <InputField
           label={chrome.i18n.getMessage("connectionPassword")}
           type="password"
           {...register("password", { required: true })}
-          error={errors.password && "Password is required"}
+          error={errors.password && chrome.i18n.getMessage("validationPasswordMissing")}
         />
         <Select
           label={chrome.i18n.getMessage("connectionType")}
           {...register("type", { required: true })}
-          error={errors.type && "Type is required"}
         >
           {connectionTypes.map((type) => (
             <option key={type}>{type}</option>

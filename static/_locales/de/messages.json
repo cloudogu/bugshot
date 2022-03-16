@@ -115,5 +115,17 @@
   },
   "errorMissingScreenshot": {
     "message": "Screenshot nicht gefunden"
+  },
+  "validationUrlMissing": {
+    "message": "Url wird benötigt"
+  },
+  "validationUsernameMissing": {
+    "message": "Benutzername wird benötigt"
+  },
+  "validationPasswordMissing": {
+    "message": "Passwort wird benötigt"
+  },
+  "validationSubjectMissing": {
+    "message": "Betreff wird benötigt"
   }
 }
