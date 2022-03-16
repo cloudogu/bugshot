@@ -5,6 +5,8 @@ const logout = () => {
   chrome.tabs.getCurrent((tab) => {
     if (tab?.id) {
       chrome.tabs.remove(tab.id);
+    } else {
+      window.close();
     }
   });
 };
