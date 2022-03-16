@@ -49,6 +49,15 @@ const upload = async (accessToken, package) => {
   });
 
   if (!response.ok) {
+    console.log(`status: ${response.status} ${response.statusText}`);
+    const body = await response.text();
+    console.log(`body: ${body}`);
+    throw new Error("Failed to upload package");
+  }
+
+  const result = await response.json();
+  if (result.uploadState === "FAILURE") {
+    console.log(JSON.stringify(result, null, 2));
     throw new Error("Failed to upload package");
   }
 };
@@ -64,6 +73,9 @@ const publish = async (accessToken) => {
   });
 
   if (!response.ok) {
+    console.log(`status: ${response.status} ${response.statusText}`);
+    const body = await response.text();
+    console.log(`body: ${body}`);
     throw new Error("Failed to publish package");
   }
 }
