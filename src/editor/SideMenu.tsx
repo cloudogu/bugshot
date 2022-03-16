@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import { BugShot, Screenshot } from "../api/types";
 import Spinner from "../shared/Spinner";
 import IssueEditor from "./IssueEditor";
@@ -15,6 +16,7 @@ type Props = {
 const Container: FC = ({ children }) => <aside className="w-1/4 h-full">{children}</aside>;
 
 const SideMenu: FC<Props> = ({ screenshot, bugshot }) => {
+  const form = useForm();
   const { entries, isLoading, reload } = useTemplates();
 
   if (isLoading) {
@@ -34,16 +36,18 @@ const SideMenu: FC<Props> = ({ screenshot, bugshot }) => {
   }
 
   return (
-    <Container>
-      <Tabs>
-        <Tab title={chrome.i18n.getMessage("createIssueTitle")}>
-          <IssueEditor screenshot={screenshot} bugshot={bugshot} templates={entries} />
-        </Tab>
-        <Tab title={chrome.i18n.getMessage("settingsTitle")}>
-          <Settings templates={entries} />
-        </Tab>
-      </Tabs>
-    </Container>
+    <FormProvider {...form}>
+      <Container>
+        <Tabs>
+          <Tab title={chrome.i18n.getMessage("createIssueTitle")}>
+            <IssueEditor screenshot={screenshot} bugshot={bugshot} templates={entries} />
+          </Tab>
+          <Tab title={chrome.i18n.getMessage("settingsTitle")}>
+            <Settings templates={entries} />
+          </Tab>
+        </Tabs>
+      </Container>
+    </FormProvider>
   );
 };
 

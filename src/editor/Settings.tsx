@@ -1,7 +1,9 @@
 import React, { FC, useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../shared/Button";
+import { CreateIssueForm } from "./CreateIssueForm";
 import logout from "./logout";
 import { TemplateEntry } from "./useTemplates";
 
@@ -10,16 +12,28 @@ type LineProps = {
   template: TemplateEntry;
 };
 
-const TemplateLine: FC<LineProps> = ({ templates, template }) => (
-  <li className="w-full p-2 text-sm">
-    <span>{template.name}</span>
-    {templates.length > 1 ? (
-      <button type="button" className="float-right w-4 h-4" onClick={template.remove}>
-        <FontAwesomeIcon icon={faTrash} />
-      </button>
-    ) : null}
-  </li>
-);
+const TemplateLine: FC<LineProps> = ({ templates, template }) => {
+  const { getValues, resetField } = useFormContext<CreateIssueForm>();
+
+  const remove = () => {
+    const currentTemplate = getValues("template");
+    if (currentTemplate === template.name) {
+      resetField("template");
+    }
+    template.remove();
+  };
+
+  return (
+    <li className="w-full p-2 text-sm">
+      <span>{template.name}</span>
+      {templates.length > 1 ? (
+        <button type="button" className="float-right w-4 h-4" onClick={remove}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      ) : null}
+    </li>
+  );
+};
 
 type EditorProps = {
   templates: TemplateEntry[];

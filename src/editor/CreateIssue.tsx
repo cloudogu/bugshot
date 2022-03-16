@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { Screenshot, BugShot, Connection } from "../api/types";
 import Button from "../shared/Button";
 import ErrorNotification from "../shared/ErrorNotification";
@@ -7,6 +7,7 @@ import FormContainer from "../shared/FormContainer";
 import InputField from "../shared/InputField";
 import Select from "../shared/Select";
 import Textarea from "../shared/Textarea";
+import { CreateIssueForm } from "./CreateIssueForm";
 import useCreateIssue, { CreatedIssue } from "./useCreateIssue";
 import { TemplateEntry } from "./useTemplates";
 
@@ -17,19 +18,13 @@ type Props = {
   templates: TemplateEntry[];
 };
 
-type CreateIssueForm = {
-  subject: string;
-  description: string;
-  template: string;
-};
-
-const CreateIssue: FC<Props> = ({connection, screenshot, bugshot, templates}) => {
-  const {create, isLoading, error} = useCreateIssue();
+const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) => {
+  const { create, isLoading, error } = useCreateIssue();
   const {
     register,
     handleSubmit,
-    formState: {errors},
-  } = useForm<CreateIssueForm>();
+    formState: { errors },
+  } = useFormContext<CreateIssueForm>();
 
   const close = (issue: CreatedIssue, template: TemplateEntry) => {
     template.moveToTop();
@@ -80,11 +75,11 @@ const CreateIssue: FC<Props> = ({connection, screenshot, bugshot, templates}) =>
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <ErrorNotification error={error}/>
+      <ErrorNotification error={error} />
       <FormContainer>
         <Select
           label={chrome.i18n.getMessage("createIssueTemplate")}
-          {...register("template", {required: true})}
+          {...register("template", { required: true })}
           error={errors.template ? "Template is required" : null}
         >
           {templates.map((template) => (
@@ -93,11 +88,10 @@ const CreateIssue: FC<Props> = ({connection, screenshot, bugshot, templates}) =>
         </Select>
         <InputField
           label={chrome.i18n.getMessage("createIssueSubject")}
-          {...register("subject", {required: true})}
+          {...register("subject", { required: true })}
           error={errors.subject ? chrome.i18n.getMessage("validationSubjectMissing") : null}
         />
-        <Textarea label={chrome.i18n.getMessage("createIssueDesc")}
-                  {...register("description")} />
+        <Textarea label={chrome.i18n.getMessage("createIssueDesc")} {...register("description")} />
         <Button type="submit" isLoading={isLoading}>
           {chrome.i18n.getMessage("createIssueSaveButton")}
         </Button>
