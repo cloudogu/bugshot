@@ -72,8 +72,7 @@ const deploy = async () => {
   try {
     await access(config.package, constants.R_OK);
   } catch {
-    console.log(`could not read package ${config.package}`);
-    return;
+    throw new Error(`could not read package ${config.package}`);
   }
 
   const accessToken = await fetchAccessToken();
