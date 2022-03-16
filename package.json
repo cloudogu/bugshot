@@ -10,7 +10,8 @@
     "format": "prettier --write src static",
     "lint": "eslint src/**/*.{ts,tsx} static/**/*.html",
     "typecheck": "tsc --noEmit",
-    "analyze-bundles": "cross-env NODE_ENV=production ANALYZE_BUNDLES=true webpack"
+    "analyze-bundles": "cross-env NODE_ENV=production ANALYZE_BUNDLES=true webpack",
+    "deploy": "node scripts/deploy.js"
   },
   "dependencies": {
     "@cloudogu/react-img-editor": "^0.4.0",
