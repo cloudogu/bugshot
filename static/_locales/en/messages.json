@@ -3,7 +3,7 @@
     "message": "Capture visual bugs and report it to redmine."
   },
   "appDefaultTitle": {
-    "message": "Visuelle Fehler melden"
+    "message": "Report visual bugs"
   },
   "connectionTitle": {
     "message": "Create Redmine Connection"
@@ -132,6 +132,9 @@
     "message": "Password is required"
   },
   "validationSubjectMissing": {
-    "message": "Betreff wird benötigt"
+    "message": "Subject is required"
+  },
+  "validationTemplateMissing": {
+    "message": "Template is required"
   }
 }
