@@ -70,7 +70,18 @@ pipeline {
       }
       steps {
         withOAuthCredentials {
-          sh "yarn run deploy"
+          sh "yarn run store-upload"
+          script {
+            try {
+              sh "yarn run store-publish"
+            } catch (err) {
+              echo err.getMessage()
+              mail to: 'browser-ext@cloudogu.com',
+                subject: "Failed to publish uploaded BugShot Package",
+                body: "Check console output at ${BUILD_URL} to view the results and publish the package manually https://chrome.google.com/webstore/devconsole/"
+              currentBuild.result = 'UNSTABLE'
+            }
+          }
         }
       }
     }
