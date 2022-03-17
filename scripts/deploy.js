@@ -63,7 +63,7 @@ const upload = async (accessToken, package) => {
 };
 
 const publish = async (accessToken) => {
-  const response = await fetch(`https://www.googleapis.com/chromewebstore/v1.1/items/$${config.itemId}/publish`, {
+  const response = await fetch(`https://www.googleapis.com/chromewebstore/v1.1/items/${config.itemId}/publish`, {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${accessToken}`,
@@ -81,14 +81,20 @@ const publish = async (accessToken) => {
 }
 
 const deploy = async () => {
+  console.log("... check package");
   try {
     await access(config.package, constants.R_OK);
   } catch {
     throw new Error(`could not read package ${config.package}`);
   }
 
+  console.log("... fetch access token");
   const accessToken = await fetchAccessToken();
+
+  console.log("... upload package");
   await upload(accessToken, createReadStream(config.package));
+
+  console.log("... publish package");
   await publish(accessToken)
 };
 
