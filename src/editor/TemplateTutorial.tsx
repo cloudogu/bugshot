@@ -12,7 +12,7 @@ const TemplateTutorial: FC<Props> = ({ reload }) => {
   const { connection, isLoading } = useConnection();
 
   if (isLoading) {
-    return chrome.i18n.getMessage("loading");
+    return <p>{chrome.i18n.getMessage("loading")}</p>;
   }
 
   return (
