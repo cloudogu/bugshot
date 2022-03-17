@@ -1,6 +1,6 @@
 {
   "name": "bugshot",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Capture visual bugs and report it to redmine",
   "author": "SCM Team <scm-team@cloudogu.com>",
   "license": "MIT",
