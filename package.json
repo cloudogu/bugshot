@@ -11,7 +11,8 @@
     "lint": "eslint src/**/*.{ts,tsx} static/**/*.html",
     "typecheck": "tsc --noEmit",
     "analyze-bundles": "cross-env NODE_ENV=production ANALYZE_BUNDLES=true webpack",
-    "deploy": "node scripts/deploy.js"
+    "store-upload": "node scripts/upload.js",
+    "store-publish": "node scripts/publish.js"
   },
   "dependencies": {
     "@cloudogu/react-img-editor": "^0.4.0",
