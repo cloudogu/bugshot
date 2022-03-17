@@ -80,7 +80,7 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) 
         <Select
           label={chrome.i18n.getMessage("createIssueTemplate")}
           {...register("template", { required: true })}
-          error={errors.template ? "Template is required" : null}
+          error={errors.template ? chrome.i18n.getMessage("validationTemplateMissing") : null}
         >
           {templates.map((template) => (
             <option key={template.name}>{template.name}</option>

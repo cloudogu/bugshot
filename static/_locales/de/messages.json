@@ -133,5 +133,8 @@
   },
   "validationSubjectMissing": {
     "message": "Betreff wird benötigt"
+  },
+  "validationTemplateMissing": {
+    "message": "Template wird benötigt"
   }
 }
