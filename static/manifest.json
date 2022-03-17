@@ -38,7 +38,7 @@
   "permissions": ["activeTab", "storage", "notifications"],
   "host_permissions": ["http://*/", "https://*/"],
   "commands": {
-    "_execute_browser_action": {
+    "_execute_action": {
       "suggested_key": {
         "default": "Shift+Ctrl+S",
         "mac": "Shift+Command+S"
