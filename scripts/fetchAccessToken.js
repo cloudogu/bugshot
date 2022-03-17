@@ -36,4 +36,4 @@ const fetchAccessToken = async () => {
   return oauth.access_token;
 };
 
-export default fetchAccessToken;
+module.exports = fetchAccessToken;
