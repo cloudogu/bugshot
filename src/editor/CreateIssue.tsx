@@ -26,9 +26,7 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) 
     formState: { errors },
   } = useFormContext<CreateIssueForm>();
 
-  const close = (issue: CreatedIssue, template: TemplateEntry) => {
-    template.moveToTop();
-
+  const sendNotification = (issue: CreatedIssue) => {
     chrome.notifications.create(`bugshot-${connection.url}/issues/${issue.id}`, {
       type: "basic",
       iconUrl: "images/bugshot-icon-128x128.png",
@@ -41,19 +39,18 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) 
         },
       ],
     });
-
-    // wait for the notification popup
-    setTimeout(() => {
-      chrome.tabs.getCurrent((tab) => {
-        if (tab?.id) {
-          // then close the screenshot tab
-          chrome.tabs.remove(tab.id);
-        }
-      });
-    }, 100);
   };
 
-  const onSubmit = (issue: CreateIssueForm) => {
+  const close = () => {
+    chrome.tabs.getCurrent((tab) => {
+      if (tab?.id) {
+        // then close the screenshot tab
+        chrome.tabs.remove(tab.id);
+      }
+    });
+  };
+
+  const createIssue = (issue: CreateIssueForm, open: boolean) => {
     const template = templates.find((t) => t.name === issue.template);
     if (!template) {
       throw new Error(`could not find template ${issue.template}`);
@@ -69,9 +66,21 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) 
         screenshot,
       },
       bugshot,
-      (createdIssue: CreatedIssue) => close(createdIssue, template)
+      (createdIssue: CreatedIssue) => {
+        template.moveToTop();
+        if (!open) {
+          sendNotification(createdIssue);
+          // wait for the notification popup
+          setTimeout(close, 100);
+        } else {
+          window.location.href = `${connection.url}/issues/${createdIssue.id}`;
+        }
+      }
     );
   };
+
+  const onSubmit = (issue: CreateIssueForm) => createIssue(issue, false);
+  const onSubmitAndOpen = (issue: CreateIssueForm) => createIssue(issue, true);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -92,9 +101,14 @@ const CreateIssue: FC<Props> = ({ connection, screenshot, bugshot, templates }) 
           error={errors.subject ? chrome.i18n.getMessage("validationSubjectMissing") : null}
         />
         <Textarea label={chrome.i18n.getMessage("createIssueDesc")} {...register("description")} />
-        <Button type="submit" isLoading={isLoading}>
-          {chrome.i18n.getMessage("createIssueSaveButton")}
-        </Button>
+        <div className="flex gap-2">
+          <Button isLoading={isLoading} variant="secondary" className="w-full" onClick={handleSubmit(onSubmitAndOpen)}>
+            {chrome.i18n.getMessage("createIssueSaveAndOpenButton")}
+          </Button>
+          <Button type="submit" className="w-full" isLoading={isLoading}>
+            {chrome.i18n.getMessage("createIssueSaveButton")}
+          </Button>
+        </div>
       </FormContainer>
     </form>
   );

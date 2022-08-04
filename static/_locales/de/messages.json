@@ -41,6 +41,9 @@
   "createIssueSaveButton": {
     "message": "Speichern"
   },
+  "createIssueSaveAndOpenButton": {
+    "message": "Speichern & öffnen"
+  },
   "settingsTitle": {
     "message": "Einstellungen"
   },
